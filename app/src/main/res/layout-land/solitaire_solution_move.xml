@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appBackground"
+    android:orientation="horizontal"
+    android:weightSum="3">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:layout_weight="1"
+        >
+        <TextView
+            android:id="@+id/card_origin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Ryk: \nKlør Dronning"
+            android:textSize="24dp"
+            android:layout_weight="0.5"
+            android:textAlignment="center"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/card_destination"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Til: \nHjerter Konge"
+            android:textSize="24dp"
+            android:layout_weight="0.5"
+            android:textAlignment="center"
+            android:gravity="center"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:weightSum="3">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/c12"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_arrow_downward_24"
+            android:padding="30dp"
+            android:layout_margin="20dp"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/h13"
+            android:layout_marginBottom="10dp"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:weightSum="1"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/h13"
+                android:padding="60dp"
+                android:layout_marginBottom="20dp"
+                android:layout_centerHorizontal="true"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/c12"
+                android:padding="40dp"
+                android:layout_marginTop="60dp"
+                android:layout_centerHorizontal="true"
+                />
+
+        </RelativeLayout>
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:text="Scan Igen"
+            android:layout_marginBottom="80dp"
+            />
+    </LinearLayout>
+</LinearLayout>
