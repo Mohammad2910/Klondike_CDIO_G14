@@ -103,6 +103,7 @@ public abstract class CameraActivity extends AppCompatActivity
     } else {
       requestPermission();
     }
+    //todo skal se omn github dur
 
     threadsTextView = findViewById(R.id.threads);
     plusImageView = findViewById(R.id.plus);
