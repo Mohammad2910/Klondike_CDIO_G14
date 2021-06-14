@@ -1,0 +1,19 @@
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/modules.xml	(revision a1c8fe453d5014d9b14e4093161a58f61af0024c)
++++ .idea/modules.xml	(revision a1c8fe453d5014d9b14e4093161a58f61af0024c)
+@@ -1,10 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ProjectModuleManager">
+-    <modules>
+-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CDIO_Klondike_group14.iml" filepath="$PROJECT_DIR$/.idea/modules/CDIO_Klondike_group14.iml" />
+-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CDIO_Klondike_group14.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CDIO_Klondike_group14.app.iml" />
+-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tensorflow-lite/CDIO_Klondike_group14.tensorflow-lite.iml" filepath="$PROJECT_DIR$/.idea/modules/tensorflow-lite/CDIO_Klondike_group14.tensorflow-lite.iml" />
+-    </modules>
+-  </component>
+-</project>
+\ No newline at end of file
