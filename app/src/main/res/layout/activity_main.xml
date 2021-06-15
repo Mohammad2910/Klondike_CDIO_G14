@@ -41,12 +41,12 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@drawable/kite" />
 
-    <org.tensorflow.lite.examples.detection.customview.OverlayView
-        android:id="@+id/tracking_overlay"
-        android:layout_width="416dp"
-        android:layout_height="416dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <org.tensorflow.lite.examples.detection.customview.OverlayView-->
+<!--        android:id="@+id/tracking_overlay"-->
+<!--        android:layout_width="416dp"-->
+<!--        android:layout_height="416dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

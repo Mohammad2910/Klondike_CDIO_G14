@@ -109,9 +109,9 @@ public class MainActivity extends AppCompatActivity {
         frameToCropTransform.invert(cropToFrameTransform);
 
         tracker = new MultiBoxTracker(this);
-        trackingOverlay = findViewById(R.id.tracking_overlay);
-        trackingOverlay.addCallback(
-                canvas -> tracker.draw(canvas));
+//        trackingOverlay = findViewById(R.id.tracking_overlay);
+//        trackingOverlay.addCallback(
+//                canvas -> tracker.draw(canvas));
 
         tracker.setFrameConfiguration(TF_OD_API_INPUT_SIZE, TF_OD_API_INPUT_SIZE, sensorOrientation);
 
