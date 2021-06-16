@@ -1,4 +1,4 @@
-package org.tensorflow.lite.examples.detection;
+package org.tensorflow.lite.examples.detection.view;
 
 import android.os.Bundle;
 
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.tensorflow.lite.examples.detection.R;
 
 /**
  * A simple {@link Fragment} subclass.

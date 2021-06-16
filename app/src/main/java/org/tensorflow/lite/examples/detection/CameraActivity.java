@@ -37,11 +37,10 @@ import android.os.Trace;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.appcompat.widget.Toolbar;
+
 import android.util.Size;
 import android.view.Surface;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
@@ -54,6 +53,8 @@ import java.nio.ByteBuffer;
 
 import org.tensorflow.lite.examples.detection.env.ImageUtils;
 import org.tensorflow.lite.examples.detection.env.Logger;
+import org.tensorflow.lite.examples.detection.view.CameraConnectionFragment;
+import org.tensorflow.lite.examples.detection.view.LegacyCameraConnectionFragment;
 
 public abstract class CameraActivity extends AppCompatActivity
     implements OnImageAvailableListener,
