@@ -15,6 +15,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.tensorflow.lite.examples.detection.customview.OverlayView;
@@ -32,40 +33,38 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.5f;
+    private Detector detector;
+    private Matrix frameToCropTransform;
+    private Matrix cropToFrameTransform;
+    private MultiBoxTracker tracker;
+    private OverlayView trackingOverlay;
+
+    protected int previewWidth = 0;
+    protected int previewHeight = 0;
+
+    private Bitmap sourceBitmap;
+    private Bitmap cropBitmap;
+
+    private Button cameraButton;
+    private ImageView startImage;
+    private TextView mainTitle;
+    private TextView subTitle;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         cameraButton = findViewById(R.id.cameraButton);
-        detectButton = findViewById(R.id.detectButton);
-        imageView = findViewById(R.id.imageView);
+        startImage = findViewById(R.id.startImage);
+        mainTitle = findViewById(R.id.mainTitle);
+        subTitle = findViewById(R.id.subTitle);
 
         cameraButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DetectorActivity.class)));
 
-        detectButton.setOnClickListener(v -> {
-            Handler handler = new Handler();
-
-            new Thread(() -> {
-                final List<Detector.Recognition> results = detector.recognizeImage(cropBitmap);
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        handleResult(cropBitmap, results);
-                    }
-                });
-            }).start();
-
-        });
-        this.sourceBitmap = Utils.getBitmapFromAsset(MainActivity.this, "kite.jpg");
-
-        this.cropBitmap = Utils.processBitmap(sourceBitmap, TF_OD_API_INPUT_SIZE);
-
-        this.imageView.setImageBitmap(cropBitmap);
-
         initBox();
     }
-
     private static final Logger LOGGER = new Logger();
 
     public static final int TF_OD_API_INPUT_SIZE = 416;
