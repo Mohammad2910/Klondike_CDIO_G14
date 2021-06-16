@@ -79,21 +79,6 @@ public class MainActivity extends AppCompatActivity {
     private static final boolean MAINTAIN_ASPECT = false;
     private Integer sensorOrientation = 90;
 
-    private Detector detector;
-
-    private Matrix frameToCropTransform;
-    private Matrix cropToFrameTransform;
-    private MultiBoxTracker tracker;
-    private OverlayView trackingOverlay;
-
-    protected int previewWidth = 0;
-    protected int previewHeight = 0;
-
-    private Bitmap sourceBitmap;
-    private Bitmap cropBitmap;
-
-    private Button cameraButton, detectButton;
-    private ImageView imageView;
 
     private void initBox() {
         previewHeight = TF_OD_API_INPUT_SIZE;
