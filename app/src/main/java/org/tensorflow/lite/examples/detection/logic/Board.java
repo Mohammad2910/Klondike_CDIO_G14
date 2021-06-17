@@ -1,22 +1,75 @@
-//package org.tensorflow.lite.examples.detection.logic;
+package org.tensorflow.lite.examples.detection.logic;
+
 //
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
 //
-//import sun.awt.image.ImageWatched;
-//
-//import java.util.Collections;
-//import java.util.Comparator;
-//import java.util.LinkedList;
-//
-//public class Board {
+
+public class Board {
+    private static Board instance = null;
+
+    //LINKED LISTS
+    public LinkedList<Card> tableauC1 = new LinkedList<>();
+    public LinkedList<Card> tableauC2 = new LinkedList<>();
+    public LinkedList<Card> tableauC3 = new LinkedList<>();
+    public LinkedList<Card> tableauC4 = new LinkedList<>();
+    public LinkedList<Card> tableauC5 = new LinkedList<>();
+    public LinkedList<Card> tableauC6 = new LinkedList<>();
+    public LinkedList<Card> tableauC7 = new LinkedList<>();
+
+    private BoardSetup boardSetup;
+
+    private Board(){
+
+    }
+
+    public static Board getInstance(){
+        if(instance == null){
+            instance = new Board();
+        }
+        return instance;
+    }
+
+    /*
+    --------------BRUG DISSE KORT--------------------
+
+    Tableau C1 Indeholder: 10h
+    Tableau C2 Indeholder: 5h
+    Tableau C3 Indeholder: Bc
+    Tableau C4 Indeholder: Ad
+    Tableau C5 Indeholder: Kc
+    Tableau C6 Indeholder: Ds
+    Tableau C7 Indeholder: 7d
+
+     */
+    public void setupBoard(String[] finalCards){
+        ArrayList<Card> listOfCards = new ArrayList<>();
+        for (int i = 0; i < finalCards.length; i++) {
+            listOfCards.add(new Card("0",0,finalCards[i]));
+        }
+        tableauC1.add(listOfCards.get(0));
+        tableauC2.add(listOfCards.get(1));
+        tableauC3.add(listOfCards.get(2));
+        tableauC4.add(listOfCards.get(3));
+        tableauC5.add(listOfCards.get(4));
+        tableauC6.add(listOfCards.get(5));
+        tableauC7.add(listOfCards.get(6));
+
+        System.out.println(
+                "\n" + "Tableau C1 Indeholder: " + tableauC1.get(0).getTitle() + "\n" +
+                "Tableau C2 Indeholder: " + tableauC2.get(0).getTitle() + "\n" +
+                "Tableau C3 Indeholder: " + tableauC3.get(0).getTitle() + "\n" +
+                "Tableau C4 Indeholder: " + tableauC4.get(0).getTitle() + "\n" +
+                "Tableau C5 Indeholder: " + tableauC5.get(0).getTitle() + "\n" +
+                "Tableau C6 Indeholder: " + tableauC6.get(0).getTitle() + "\n" +
+                "Tableau C7 Indeholder: " + tableauC7.get(0).getTitle()
+        );
+    }
 //    int counter = 1;
-//    public LinkedList<Card> wastepile = new LinkedList<>();
-//    public LinkedList<Card> tableauC1 = new LinkedList<>();
-//    public LinkedList<Card> tableauC2 = new LinkedList<>();
-//    public LinkedList<Card> tableauC3 = new LinkedList<>();
-//    public LinkedList<Card> tableauC4 = new LinkedList<>();
-//    public LinkedList<Card> tableauC5 = new LinkedList<>();
-//    public LinkedList<Card> tableauC6 = new LinkedList<>();
-//    public LinkedList<Card> tableauC7 = new LinkedList<>();
+    //public LinkedList<Card> wastepile = new LinkedList<>();
 ////    public Card foundation1 = new Card("null", 0, 0, 0, 0);
 ////    public Card foundation2 = new Card("null", 0, 0, 0, 0);
 ////    public Card foundation3 = new Card("null", 0, 0, 0, 0);
@@ -273,4 +326,4 @@
 //    public Card getFoundation4() {
 //        return foundation4;
 //    }
-//}
+}

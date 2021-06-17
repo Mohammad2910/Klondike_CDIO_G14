@@ -35,7 +35,7 @@ public class BoardSetup {
         for (int i = 0; i < 7; i++) {
             finalCards[i] = allCardsArray.get(indexOfFinalCards[i]);
         }
-
         return finalCards;
     }
+
 }

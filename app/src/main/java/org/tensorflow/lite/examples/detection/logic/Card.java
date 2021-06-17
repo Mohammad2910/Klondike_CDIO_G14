@@ -2,10 +2,10 @@ package org.tensorflow.lite.examples.detection.logic;
 
 public class Card {
     private String suit;
-    private String rank;
+    private int rank;
     private String title;
 
-    public Card(String suit, String rank, String title) {
+    public Card(String suit, int rank, String title) {
         this.suit = suit;
         this.rank = rank;
         this.title = title;
@@ -19,11 +19,11 @@ public class Card {
         this.suit = suit;
     }
 
-    public String getRank() {
+    public int getRank() {
         return rank;
     }
 
-    public void setRank(String rank) {
+    public void setRank(int rank) {
         this.rank = rank;
     }
 

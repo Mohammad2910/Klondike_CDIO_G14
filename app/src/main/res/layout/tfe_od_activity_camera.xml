@@ -22,6 +22,7 @@
     android:background="#00000000">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/black"
@@ -32,27 +33,28 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="org.tensorflow.demo.CameraActivity" >
+            tools:context="org.tensorflow.demo.CameraActivity">
 
         </FrameLayout>
+
         <ImageView
             android:id="@+id/cam_overlay"
             android:layout_width="match_parent"
             android:layout_height="735dp"
             android:scaleType="fitXY"
-            android:src="@drawable/cam_solitaire_overlay_rotate"
-            />
+            android:src="@drawable/cam_solitaire_overlay_rotate" />
 
     </RelativeLayout>
 
-    <include
-        android:id="@+id/bottom_sheet_layout"
-        layout="@layout/tfe_od_layout_bottom_sheet" />
+<!--    <include-->
+<!--        android:id="@+id/bottom_sheet_layout"-->
+<!--        layout="@layout/tfe_od_layout_bottom_sheet" />-->
 
     <Button
         android:id="@+id/nextBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_anchor="@+id/bottom_sheet_layout"
-        app:layout_anchorGravity="top|center" />
+        app:layout_anchor="@+id/relativeLayout"
+        android:text="NEXT"
+        app:layout_anchorGravity="bottom|center" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

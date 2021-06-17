@@ -66,6 +66,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
     private static final boolean SAVE_PREVIEW_BITMAP = false;
     private static final float TEXT_SIZE_DIP = 10;
+    public static LinkedHashSet<String> cardsDetected = new LinkedHashSet<String>();
+    public static LinkedList<String> allCardsDetected = new LinkedList<String>();
     OverlayView trackingOverlay;
     private Integer sensorOrientation;
 
@@ -86,6 +88,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     private MultiBoxTracker tracker;
 
     private BorderedText borderedText;
+
+
 
     @Override
     public void onPreviewSizeChosen(final Size size, final int rotation) {
@@ -225,8 +229,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                             }
                         }
                         float[] locationHolder = new float[4];
-                        LinkedHashSet<String> cardsDetected = new LinkedHashSet<String>();
-                        LinkedList<String> allCardsDetected = new LinkedList<String>();
+
 
                         for (int i = 0; i < results.size(); i++) {
                             cardsDetected.add(mappedRecognitions.get(i).getTitle());
@@ -237,7 +240,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                 System.out.println(locationHolder[j]);
                             }
                         }
-
 
                         tracker.trackResults(mappedRecognitions, currTimestamp);
                         trackingOverlay.postInvalidate();
