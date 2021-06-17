@@ -33,6 +33,7 @@ import android.util.TypedValue;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -224,13 +225,19 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                             }
                         }
                         float[] locationHolder = new float[4];
+                        LinkedHashSet<String> cardsDetected = new LinkedHashSet<String>();
+                        LinkedList<String> allCardsDetected = new LinkedList<String>();
+
                         for (int i = 0; i < results.size(); i++) {
+                            cardsDetected.add(mappedRecognitions.get(i).getTitle());
+                            allCardsDetected.add(mappedRecognitions.get(i).getTitle());
                             System.out.println("ID: " + mappedRecognitions.get(i).getId() + " Title: " + mappedRecognitions.get(i).getTitle() + " Location: " + mappedRecognitions.get(i).getLocation());
                             locationHolder = mappedRecognitions.get(i).getLocationFloats();
                             for (int j = 0; j < 4; j++) {
                                 System.out.println(locationHolder[j]);
                             }
                         }
+
 
                         tracker.trackResults(mappedRecognitions, currTimestamp);
                         trackingOverlay.postInvalidate();
