@@ -37,13 +37,6 @@
 
         </FrameLayout>
 
-        <ImageView
-            android:id="@+id/cam_overlay"
-            android:layout_width="match_parent"
-            android:layout_height="735dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/cam_solitaire_overlay_rotate" />
-
     </RelativeLayout>
 
 <!--    <include-->
@@ -53,8 +46,16 @@
     <Button
         android:id="@+id/nextBtn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="123dp"
+        android:background="@drawable/scanbutton"
+        android:fontFamily="serif"
+        android:lineSpacingExtra="8sp"
+        android:text="Næste"
+        android:textColor="#FFF7B0"
+        android:textColorHighlight="@color/startGameBtn"
+        android:textSize="65dp"
+        android:textStyle="bold"
+        android:typeface="normal"
         app:layout_anchor="@+id/relativeLayout"
-        android:text="NEXT"
         app:layout_anchorGravity="bottom|center" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

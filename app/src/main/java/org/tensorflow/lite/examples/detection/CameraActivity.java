@@ -95,7 +95,6 @@ public abstract class CameraActivity extends AppCompatActivity
 //  private ImageView plusImageView, minusImageView;
 //  private SwitchCompat apiSwitchCompat;
 //  private TextView threadsTextView;
-  private ImageView camOverlay;
   private Button nextBtn;
 
   @Override
@@ -122,7 +121,6 @@ public abstract class CameraActivity extends AppCompatActivity
     //gestureLayout = findViewById(R.id.gesture_layout);
     //sheetBehavior = BottomSheetBehavior.from(bottomSheetLayout);
     //bottomSheetArrowImageView = findViewById(R.id.bottom_sheet_arrow);
-    camOverlay = findViewById(R.id.cam_overlay);
     nextBtn = findViewById(R.id.nextBtn);
 
     nextBtn.setOnClickListener(new View.OnClickListener() {

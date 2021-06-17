@@ -90,7 +90,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     private BorderedText borderedText;
 
 
-
     @Override
     public void onPreviewSizeChosen(final Size size, final int rotation) {
         final float textSizePx =
@@ -232,12 +231,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
 
                         for (int i = 0; i < results.size(); i++) {
-                            cardsDetected.add(mappedRecognitions.get(i).getTitle());
-                            allCardsDetected.add(mappedRecognitions.get(i).getTitle());
-                            System.out.println("ID: " + mappedRecognitions.get(i).getId() + " Title: " + mappedRecognitions.get(i).getTitle() + " Location: " + mappedRecognitions.get(i).getLocation());
-                            locationHolder = mappedRecognitions.get(i).getLocationFloats();
-                            for (int j = 0; j < 4; j++) {
-                                System.out.println(locationHolder[j]);
+                            if (mappedRecognitions.get(i).getConfidence() > 0.80f ) {
+                                allCardsDetected.add(mappedRecognitions.get(i).getTitle());
+                                cardsDetected.add(mappedRecognitions.get(i).getTitle());
+                                System.out.println("ID: " + mappedRecognitions.get(i).getId() + " Title: " + mappedRecognitions.get(i).getTitle() + " Confidence: " + mappedRecognitions.get(i).getConfidence());
                             }
                         }
 
