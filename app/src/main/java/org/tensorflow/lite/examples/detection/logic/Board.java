@@ -1,6 +1,7 @@
 package org.tensorflow.lite.examples.detection.logic;
 
 //
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,23 +12,37 @@ import java.util.List;
 public class Board {
     private static Board instance = null;
 
-    //LINKED LISTS
-    public LinkedList<Card> tableauC1 = new LinkedList<>();
-    public LinkedList<Card> tableauC2 = new LinkedList<>();
-    public LinkedList<Card> tableauC3 = new LinkedList<>();
-    public LinkedList<Card> tableauC4 = new LinkedList<>();
-    public LinkedList<Card> tableauC5 = new LinkedList<>();
-    public LinkedList<Card> tableauC6 = new LinkedList<>();
-    public LinkedList<Card> tableauC7 = new LinkedList<>();
+    //Table Columns
+    private ArrayList<LinkedList<Card>> tableauAll = new ArrayList<>();
+    private LinkedList<Card> tableauC1 = new LinkedList<>();
+    private LinkedList<Card> tableauC2 = new LinkedList<>();
+    private LinkedList<Card> tableauC3 = new LinkedList<>();
+    private LinkedList<Card> tableauC4 = new LinkedList<>();
+    private LinkedList<Card> tableauC5 = new LinkedList<>();
+    private LinkedList<Card> tableauC6 = new LinkedList<>();
+    private LinkedList<Card> tableauC7 = new LinkedList<>();
 
+    //Foundation Cards
+    private ArrayList<Card> foundationsAll = new ArrayList<Card>();
+    private Card foundation1 = new Card("h", 0, "");
+    private Card foundation2 = new Card("s", 0, "");
+    private Card foundation3 = new Card("c", 0, "");
+    private Card foundation4 = new Card("d", 0, "");
+
+    //Wastepile
+    private LinkedList<Card> wastePile = new LinkedList<>();
+    //Drawpile
+    private LinkedList<Card> drawPile = new LinkedList<>();
+
+    //BoardSetup
     private BoardSetup boardSetup;
 
-    private Board(){
+    private Board() {
 
     }
 
-    public static Board getInstance(){
-        if(instance == null){
+    public static Board getInstance() {
+        if (instance == null) {
             instance = new Board();
         }
         return instance;
@@ -45,28 +60,145 @@ public class Board {
     Tableau C7 Indeholder: 7d
 
      */
-    public void setupBoard(String[] finalCards){
+    public void setupBoard(String[] finalCards) {
         ArrayList<Card> listOfCards = new ArrayList<>();
         for (int i = 0; i < finalCards.length; i++) {
-            listOfCards.add(new Card("0",0,finalCards[i]));
+            listOfCards.add(new Card("0", 0, finalCards[i]));
         }
+
+        //Drawpile
+        for (int i = 0; i < 24; i++) {
+            drawPile.add(new Card("", 0, "NA"));
+        }
+
+        //Foundations
+        foundationsAll.add(foundation1);
+        foundationsAll.add(foundation2);
+        foundationsAll.add(foundation3);
+        foundationsAll.add(foundation4);
+
+        //Tableau 1
         tableauC1.add(listOfCards.get(0));
+
+        //Tableau 2
         tableauC2.add(listOfCards.get(1));
+        tableauC2.add(new Card("", 0, "NA"));
+
+        //Tableau 3
         tableauC3.add(listOfCards.get(2));
+        for (int i = 0; i < 2; i++) {
+            tableauC3.add(new Card("", 0, "NA"));
+        }
+
+        //Tableau 4
         tableauC4.add(listOfCards.get(3));
+        for (int i = 0; i < 3; i++) {
+            tableauC4.add(new Card("", 0, "NA"));
+        }
+
+        //Tableau 5
         tableauC5.add(listOfCards.get(4));
+        for (int i = 0; i < 4; i++) {
+            tableauC5.add(new Card("", 0, "NA"));
+        }
+
+        //Tableau 6
         tableauC6.add(listOfCards.get(5));
+        for (int i = 0; i < 5; i++) {
+            tableauC6.add(new Card("", 0, "NA"));
+        }
+
+        //Tableau 7
         tableauC7.add(listOfCards.get(6));
+        for (int i = 0; i < 6; i++) {
+            tableauC7.add(new Card("", 0, "NA"));
+        }
+
+        tableauAll.add(tableauC1);
+        tableauAll.add(tableauC2);
+        tableauAll.add(tableauC3);
+        tableauAll.add(tableauC4);
+        tableauAll.add(tableauC5);
+        tableauAll.add(tableauC6);
+        tableauAll.add(tableauC7);
 
         System.out.println(
                 "\n" + "Tableau C1 Indeholder: " + tableauC1.get(0).getTitle() + "\n" +
-                "Tableau C2 Indeholder: " + tableauC2.get(0).getTitle() + "\n" +
-                "Tableau C3 Indeholder: " + tableauC3.get(0).getTitle() + "\n" +
-                "Tableau C4 Indeholder: " + tableauC4.get(0).getTitle() + "\n" +
-                "Tableau C5 Indeholder: " + tableauC5.get(0).getTitle() + "\n" +
-                "Tableau C6 Indeholder: " + tableauC6.get(0).getTitle() + "\n" +
-                "Tableau C7 Indeholder: " + tableauC7.get(0).getTitle()
+                        "Tableau C2 Indeholder: " + tableauC2.get(0).getTitle() + "\n" +
+                        "Tableau C3 Indeholder: " + tableauC3.get(0).getTitle() + "\n" +
+                        "Tableau C4 Indeholder: " + tableauC4.get(0).getTitle() + "\n" +
+                        "Tableau C5 Indeholder: " + tableauC5.get(0).getTitle() + "\n" +
+                        "Tableau C6 Indeholder: " + tableauC6.get(0).getTitle() + "\n" +
+                        "Tableau C7 Indeholder: " + tableauC7.get(0).getTitle()
         );
+    }
+
+    public void drawCard(Card drawnCard){
+        wastePile.addFirst(drawnCard);
+        drawPile.remove();
+    }
+
+    public void resetDrawpile(){
+        int wastePileSize = wastePile.size();
+        for (int i = 0; i < wastePileSize; i++) {
+            drawPile.add(new Card("", 0, "NA"));
+            wastePile.remove();
+        }
+    }
+
+    public void moveTableauToFoundation(Card card, int columnNo){
+        for (int i = 0; i < 4; i++) {
+            if(card.getSuit().equals(foundationsAll.get(i).getSuit())){
+                foundationsAll.set(i,card);
+                tableauAll.get(columnNo).removeFirst();
+                return;
+            }
+        }
+    }
+
+    public void moveWastepileToFoundation(){
+        for (int i = 0; i < 4 ; i++) {
+            if (wastePile.getFirst().getSuit().equals(foundationsAll.get(i).getSuit())){
+                foundationsAll.set(i,wastePile.getFirst());
+                wastePile.removeFirst();
+                return;
+            }
+        }
+
+    }
+
+    public void flipCardTableau(Card card, int columnNo){
+        tableauAll.get(columnNo).remove();
+        tableauAll.get(columnNo).addFirst(card);
+    }
+
+    public void moveWastepileToTableau(Card card, int columnNo){
+        wastePile.removeFirst();
+        tableauAll.get(columnNo).addFirst(card);
+    }
+
+    public void moveCardColumn(Card card, int columnNoFrom,int columnNoTo ){
+
+        //If(multipleCard == true){
+        //iterate cards in list from i = 0 ; i < ; i ++)
+        // cards in column gets removed
+        // add cards to the other column.
+        ArrayList<Card> cardHolderList = new ArrayList<>();
+        for (int i = 0; i < tableauAll.get(columnNoFrom).size() ; i++) {
+            cardHolderList.add(tableauAll.get(columnNoFrom).get(i));
+            if (tableauAll.get(columnNoFrom).get(i) == card){
+                Collections.reverse(cardHolderList);
+                for (int j = 0; j < i ; j++) {
+                    tableauAll.get(columnNoTo).add(cardHolderList.get(j));
+                    tableauAll.get(columnNoFrom).removeFirst();
+                }
+                return;
+            }
+            //holder that keeps element iterate through for future removal
+            //holderList.add(card.get(i))
+
+        }
+
     }
 //    int counter = 1;
     //public LinkedList<Card> wastepile = new LinkedList<>();
