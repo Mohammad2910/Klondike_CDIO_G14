@@ -133,12 +133,12 @@ public class Board {
         );
     }
 
-    public void drawCard(Card drawnCard){
+    public void drawCard(Card drawnCard) {
         wastePile.addFirst(drawnCard);
         drawPile.remove();
     }
 
-    public void resetDrawpile(){
+    public void resetDrawpile() {
         int wastePileSize = wastePile.size();
         for (int i = 0; i < wastePileSize; i++) {
             drawPile.add(new Card("", 0, "NA"));
@@ -146,20 +146,20 @@ public class Board {
         }
     }
 
-    public void moveTableauToFoundation(Card card, int columnNo){
+    public void moveTableauToFoundation(Card card, int columnNo) {
         for (int i = 0; i < 4; i++) {
-            if(card.getSuit().equals(foundationsAll.get(i).getSuit())){
-                foundationsAll.set(i,card);
+            if (card.getSuit().equals(foundationsAll.get(i).getSuit())) {
+                foundationsAll.set(i, card);
                 tableauAll.get(columnNo).removeFirst();
                 return;
             }
         }
     }
 
-    public void moveWastepileToFoundation(){
-        for (int i = 0; i < 4 ; i++) {
-            if (wastePile.getFirst().getSuit().equals(foundationsAll.get(i).getSuit())){
-                foundationsAll.set(i,wastePile.getFirst());
+    public void moveWastepileToFoundation() {
+        for (int i = 0; i < 4; i++) {
+            if (wastePile.getFirst().getSuit().equals(foundationsAll.get(i).getSuit())) {
+                foundationsAll.set(i, wastePile.getFirst());
                 wastePile.removeFirst();
                 return;
             }
@@ -167,38 +167,105 @@ public class Board {
 
     }
 
-    public void flipCardTableau(Card card, int columnNo){
-        tableauAll.get(columnNo).remove();
-        tableauAll.get(columnNo).addFirst(card);
-    }
-
-    public void moveWastepileToTableau(Card card, int columnNo){
+    public void moveWastepileToTableau(Card card, int columnNo) {
         wastePile.removeFirst();
         tableauAll.get(columnNo).addFirst(card);
     }
 
-    public void moveCardColumn(Card card, int columnNoFrom,int columnNoTo ){
+    public void flipCardTableau(Card card, int columnNo) {
+        tableauAll.get(columnNo).remove();
+        tableauAll.get(columnNo).addFirst(card);
+    }
 
-        //If(multipleCard == true){
-        //iterate cards in list from i = 0 ; i < ; i ++)
-        // cards in column gets removed
-        // add cards to the other column.
+    public void moveCardColumn(Card card, int columnNoFrom, int columnNoTo) {
         ArrayList<Card> cardHolderList = new ArrayList<>();
-        for (int i = 0; i < tableauAll.get(columnNoFrom).size() ; i++) {
+        for (int i = 0; i < tableauAll.get(columnNoFrom).size(); i++) {
             cardHolderList.add(tableauAll.get(columnNoFrom).get(i));
-            if (tableauAll.get(columnNoFrom).get(i) == card){
+            if (tableauAll.get(columnNoFrom).get(i) == card) {
                 Collections.reverse(cardHolderList);
-                for (int j = 0; j < i ; j++) {
+                for (int j = 0; j < i; j++) {
                     tableauAll.get(columnNoTo).add(cardHolderList.get(j));
                     tableauAll.get(columnNoFrom).removeFirst();
                 }
                 return;
             }
-            //holder that keeps element iterate through for future removal
-            //holderList.add(card.get(i))
-
         }
+    }
 
+
+    /*
+     Getters
+     */
+    public LinkedList<Card> getHighestColumnCard(){
+        LinkedList<Card> highestCards = new LinkedList<>();
+        for (LinkedList<Card> columnCards : getTableauAll()) {
+            for (int i = columnCards.size() - 1; i >= 0; i--) {
+                if (!columnCards.get(i).getTitle().equals("NA")){
+                    highestCards.add(columnCards.get(i));
+                }
+            }
+        }
+        return highestCards;
+    }
+
+    public ArrayList<LinkedList<Card>> getTableauAll() {
+        return tableauAll;
+    }
+
+    public LinkedList<Card> getTableauC1() {
+        return tableauC1;
+    }
+
+    public LinkedList<Card> getTableauC2() {
+        return tableauC2;
+    }
+
+    public LinkedList<Card> getTableauC3() {
+        return tableauC3;
+    }
+
+    public LinkedList<Card> getTableauC4() {
+        return tableauC4;
+    }
+
+    public LinkedList<Card> getTableauC5() {
+        return tableauC5;
+    }
+
+    public LinkedList<Card> getTableauC6() {
+        return tableauC6;
+    }
+
+    public LinkedList<Card> getTableauC7() {
+        return tableauC7;
+    }
+
+    public ArrayList<Card> getFoundationsAll() {
+        return foundationsAll;
+    }
+
+    public Card getFoundation1() {
+        return foundation1;
+    }
+
+    public Card getFoundation2() {
+        return foundation2;
+    }
+
+    public Card getFoundation3() {
+        return foundation3;
+    }
+
+    public Card getFoundation4() {
+        return foundation4;
+    }
+
+    public LinkedList<Card> getWastePile() {
+        return wastePile;
+    }
+
+    public LinkedList<Card> getDrawPile() {
+        return drawPile;
     }
 //    int counter = 1;
     //public LinkedList<Card> wastepile = new LinkedList<>();
@@ -404,58 +471,6 @@ public class Board {
 //            }
 //        });
 //        return cards;
-//    }
-//
-//    public LinkedList<Card> getCards() {
-//        return cards;
-//    }
-//
-//
-//    public LinkedList<Card> getWastepile() {
-//        return wastepile;
-//    }
-//
-//    public LinkedList<Card> getTableauC1() {
-//        return tableauC1;
-//    }
-//
-//    public LinkedList<Card> getTableauC2() {
-//        return tableauC2;
-//    }
-//
-//    public LinkedList<Card> getTableauC3() {
-//        return tableauC3;
-//    }
-//
-//    public LinkedList<Card> getTableauC4() {
-//        return tableauC4;
-//    }
-//
-//    public LinkedList<Card> getTableauC5() {
-//        return tableauC5;
-//    }
-//
-//    public LinkedList<Card> getTableauC6() {
-//        return tableauC6;
-//    }
-//
-//    public LinkedList<Card> getTableauC7() {
-//        return tableauC7;
-//    }
-//
-//    public Card getFoundation1() {
-//        return foundation1;
-//    }
-//
-//    public Card getFoundation2() {
-//        return foundation2;
-//    }
-//
-//    public Card getFoundation3() {
-//        return foundation3;
-//    }
-//
-//    public Card getFoundation4() {
-//        return foundation4;
+
 //    }
 }
