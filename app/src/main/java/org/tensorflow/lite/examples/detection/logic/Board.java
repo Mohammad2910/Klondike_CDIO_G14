@@ -146,11 +146,11 @@ public class Board {
         }
     }
 
-    public void moveTableauToFoundation(Card card, int columnNo) {
+    public void moveTableauToFoundation(Card card, int columnNoFrom) {
         for (int i = 0; i < 4; i++) {
             if (card.getSuit().equals(foundationsAll.get(i).getSuit())) {
                 foundationsAll.set(i, card);
-                tableauAll.get(columnNo).removeFirst();
+                tableauAll.get(columnNoFrom).removeFirst();
                 return;
             }
         }
@@ -167,14 +167,14 @@ public class Board {
 
     }
 
-    public void moveWastepileToTableau(Card card, int columnNo) {
+    public void moveWastepileToTableau(Card card, int columnNoTo) {
         wastePile.removeFirst();
-        tableauAll.get(columnNo).addFirst(card);
+        tableauAll.get(columnNoTo).addFirst(card);
     }
 
-    public void flipCardTableau(Card card, int columnNo) {
-        tableauAll.get(columnNo).remove();
-        tableauAll.get(columnNo).addFirst(card);
+    public void flipCardTableau(Card card, int columnNoFrom) {
+        tableauAll.get(columnNoFrom).remove();
+        tableauAll.get(columnNoFrom).addFirst(card);
     }
 
     public void moveCardColumn(Card card, int columnNoFrom, int columnNoTo) {
