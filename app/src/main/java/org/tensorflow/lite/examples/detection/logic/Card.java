@@ -35,3 +35,4 @@ public class Card {
         this.title = title;
     }
 }
+

@@ -140,6 +140,8 @@ public abstract class CameraActivity extends AppCompatActivity
 //        }
         boardSetup = new BoardSetup(DetectorActivity.cardsDetected,DetectorActivity.allCardsDetected);
         Board.getInstance().setupBoard(boardSetup.makeCards());
+
+
         Intent i = new Intent(getApplicationContext(), MakeMoveActivity.class);
         startActivity(i);
       }

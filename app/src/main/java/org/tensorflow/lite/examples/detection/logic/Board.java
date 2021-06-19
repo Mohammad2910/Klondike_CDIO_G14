@@ -62,8 +62,20 @@ public class Board {
      */
     public void setupBoard(String[] finalCards) {
         ArrayList<Card> listOfCards = new ArrayList<>();
+        String suit;
+        int rank;
         for (int i = 0; i < finalCards.length; i++) {
-            listOfCards.add(new Card("0", 0, finalCards[i]));
+            if(finalCards[i].length() == 2){
+                suit = String.valueOf(finalCards[i].charAt(1));
+                rank = Integer.parseInt(finalCards[i].replaceAll("[\\D]", ""));
+                listOfCards.add(new Card(suit, rank, finalCards[i]));
+            }
+            if(finalCards[i].length() == 3){
+                suit = String.valueOf(finalCards[i].charAt(2));
+                rank = Integer.parseInt(finalCards[i].replaceAll("[\\D]", ""));
+                listOfCards.add(new Card(suit, rank, finalCards[i]));
+            }
+
         }
 
         //Drawpile
@@ -183,8 +195,8 @@ public class Board {
             cardHolderList.add(tableauAll.get(columnNoFrom).get(i));
             if (tableauAll.get(columnNoFrom).get(i) == card) {
                 Collections.reverse(cardHolderList);
-                for (int j = 0; j < i; j++) {
-                    tableauAll.get(columnNoTo).add(cardHolderList.get(j));
+                for (int j = 0; j < i+1; j++) {
+                    tableauAll.get(columnNoTo).addFirst(cardHolderList.get(j));
                     tableauAll.get(columnNoFrom).removeFirst();
                 }
                 return;
@@ -267,210 +279,14 @@ public class Board {
     public LinkedList<Card> getDrawPile() {
         return drawPile;
     }
-//    int counter = 1;
-    //public LinkedList<Card> wastepile = new LinkedList<>();
-////    public Card foundation1 = new Card("null", 0, 0, 0, 0);
-////    public Card foundation2 = new Card("null", 0, 0, 0, 0);
-////    public Card foundation3 = new Card("null", 0, 0, 0, 0);
-////    public Card foundation4 = new Card("null", 0, 0, 0, 0);
-//
-//    public LinkedList<Card> cards;
-//
-//    public Board(LinkedList<Card> cards) {
-//        this.cards = cards;
-//
-//
-//        for (Card card : cards) {
-//            if ((card.left + card.right) / 2 <= 267 && (card.top + card.bottom) / 2 >= 187) {
-//                wastepile.add(card);
-//                continue;
-//            }
-//            if ((card.left + card.right) / 2 >= 267 && (card.top + card.bottom) / 2 <= 187) {
-//                switch (counter) {
-//                    case 1:
-//                        foundation1 = card;
-//                        break;
-//                    case 2:
-//                        foundation2 = card;
-//                        break;
-//                    case 3:
-//                        foundation3 = card;
-//                        break;
-//                    case 4:
-//                        foundation4 = card;
-//                        break;
-//                    default:
-//                        break;
-//                }
-//                counter++;
-//                continue;
-//            }
-//            if ((card.left + card.right) / 2 >= 267 && (card.top + card.bottom) / 2 >= 187) {
-//                if (tableauC1.isEmpty()) {
-//                    tableauC1.add(card);
-//                    continue;
-//                }
-//                if (tableauC1.getLast().left <= (card.left + card.right) / 2 && (card.left + card.right) / 2 <= tableauC1.getLast().getRight()) {
-//                    tableauC1.add(card);
-//                    continue;
-//                }
-//                if (tableauC2.isEmpty()) {
-//                    tableauC2.add(card);
-//                    continue;
-//                }
-//                if (tableauC2.getLast().left <= (card.left + card.right) / 2 && (card.left + card.right) / 2 <= tableauC2.getLast().getRight()) {
-//                    tableauC2.add(card);
-//                    continue;
-//                }
-//                if (tableauC3.isEmpty()) {
-//                    tableauC3.add(card);
-//                    continue;
-//                }
-//                if (tableauC3.getLast().left <= (card.left + card.right) / 2 && (card.left + card.right) / 2 <= tableauC3.getLast().getRight()) {
-//                    tableauC3.add(card);
-//                    continue;
-//                }
-//                if (tableauC4.isEmpty()) {
-//                    tableauC4.add(card);
-//                    continue;
-//                }
-//                if (tableauC4.getLast().left <= (card.left + card.right) / 2 && (card.left + card.right) / 2 <= tableauC4.getLast().getRight()) {
-//                    tableauC4.add(card);
-//                    continue;
-//                }
-//                if (tableauC5.isEmpty()) {
-//                    tableauC5.add(card);
-//                    continue;
-//                }
-//                if (tableauC5.getLast().left <= (card.left + card.right) / 2 && (card.left + card.right) / 2 <= tableauC5.getLast().getRight()) {
-//                    tableauC5.add(card);
-//                    continue;
-//                }
-//                if (tableauC6.isEmpty()) {
-//                    tableauC6.add(card);
-//                    continue;
-//                }
-//                if (tableauC6.getLast().left <= (card.left + card.right) / 2 && (card.left + card.right) / 2 <= tableauC6.getLast().getRight()) {
-//                    tableauC6.add(card);
-//                    continue;
-//                }
-//                if (tableauC7.isEmpty()) {
-//                    tableauC7.add(card);
-//                    continue;
-//                }
-//                if (tableauC7.getLast().left <= (card.left + card.right) / 2 && (card.left + card.right) / 2 <= tableauC7.getLast().getRight()) {
-//                    tableauC7.add(card);
-//                    continue;
-//                }
-//            }
-//        }
-//
-//
-//        sort(tableauC1);
-//        sort(tableauC2);
-//        sort(tableauC3);
-//        sort(tableauC4);
-//        sort(tableauC5);
-//        sort(tableauC6);
-//        sort(tableauC7);
-//        sort(wastepile);
-//
-//
-//    }
-//
-//    //last cards meaning the cards at the back of the column stack
-//    public LinkedList<Card> getLastCards() {
-//        LinkedList<Card> lastCards = new LinkedList<>();
-//        if (!tableauC1.isEmpty()) {
-//            lastCards.add(tableauC1.getLast());
-//        }
-//        if (!tableauC2.isEmpty()) {
-//            lastCards.add(tableauC2.getLast());
-//
-//        }
-//        if (!tableauC3.isEmpty()) {
-//            lastCards.add(tableauC3.getLast());
-//
-//        }
-//        if (!tableauC4.isEmpty()) {
-//            lastCards.add(tableauC4.getLast());
-//
-//        }
-//        if (!tableauC5.isEmpty()) {
-//            lastCards.add(tableauC5.getLast());
-//
-//        }
-//        if (!tableauC6.isEmpty()) {
-//            lastCards.add(tableauC6.getLast());
-//
-//        }
-//        if (!tableauC7.isEmpty()) {
-//            lastCards.add(tableauC7.getLast());
-//
-//        }
-//
-//        return lastCards;
-//    }
-//
-//    //first cards meaning the cards at the front of the column stack
-//    public LinkedList<Card> getFirstCard() {
-//        LinkedList<Card> firstCards = new LinkedList<>();
-//        if (!tableauC1.isEmpty()) {
-//            firstCards.add(tableauC1.getFirst());
-//        }
-//        if (!tableauC2.isEmpty()) {
-//            firstCards.add(tableauC2.getFirst());
-//
-//        }
-//        if (!tableauC3.isEmpty()) {
-//            firstCards.add(tableauC3.getFirst());
-//
-//        }
-//        if (!tableauC4.isEmpty()) {
-//            firstCards.add(tableauC4.getFirst());
-//
-//        }
-//        if (!tableauC5.isEmpty()) {
-//            firstCards.add(tableauC5.getFirst());
-//
-//        }
-//        if (!tableauC6.isEmpty()) {
-//            firstCards.add(tableauC6.getFirst());
-//
-//        }
-//        if (!tableauC7.isEmpty()) {
-//            firstCards.add(tableauC7.getFirst());
-//
-//        }
-//
-//        return firstCards;
-//    }
-//
-//    public LinkedList<Card> getFoundations() {
-//        LinkedList<Card> foundations = new LinkedList<>();
-//        foundations.add(foundation1);
-//        foundations.add(foundation2);
-//        foundations.add(foundation3);
-//        foundations.add(foundation4);
-//
-//
-//        return foundations;
-//    }
-//
-//
-//    public Card getWastepileCard() {
-//        return wastepile.getFirst();
-//    }
-//
-//
-//    public LinkedList<Card> sort(LinkedList<Card> cards) {
-//        Collections.sort(cards, new Comparator<Card>() {
-//            @Override
-//            public int compare(Card o1, Card o2) {
-//                return Float.compare(o2.top, o1.top);
-//            }
-//        });
-//        return cards;
 
-//    }
+    public void printTableau(){
+        for (LinkedList<Card> cards:tableauAll){
+            System.out.println(cards.getFirst().getTitle());
+
+
+        }
+    }
+
 }
+

@@ -6,10 +6,10 @@ import java.util.LinkedList;
 public class Logic {
 
     private Board board;
-    private int columnFrom;
-    private int columnTo;
-    private Card[] movingCards = new Card[2];
-    private String validMove = "";
+    private static int columnFrom;
+    private static int columnTo;
+    private static Card[] movingCards = new Card[2];
+    private static String validMove = "";
 
     //    String[] cardSuits = {"S", "C", "H", "D"};
 
@@ -18,43 +18,33 @@ public class Logic {
     }
 
 
-//    public boolean checkAceDeuce() {
-
-
-////        for (Card card:board.getFirstCard()) {
-////            for (int i = 0; i < 4; i++) {
-////                if (card.getTitle().equals(cardSuits[i] + "1")){
-////                    movingCards[0] = cardSuits[i] + "1";
-////                    movingCards[1] = "Foundation";
-////                    return true;
-////                }
-////            }
-////        }
-////        for (Card card:board.getFirstCard()) {
-////            for (int i = 0; i < 4; i++) {
-////                if (card.getTitle().equals(cardSuits[i] + "2")){
-////                    movingCards[0] = cardSuits[i] + "2";
-////                    for (int j = 0; j < 4; j++) {
-////                        if((cardSuits[i] + "1").equals(board.getFoundations().get(j).getTitle())){
-////                            movingCards[1] = cardSuits[i] + "1";
-////                            return true;
-////                        }
-////                    }
-////                    for (Card card1:board.getFirstCard()) {
-////                        if((cardSuits[i] + "1").equals(card1.getTitle())){
-////                            movingCards[1] = cardSuits[i] + "1";
-////                            return true;
-////                        }
-////                    }
-////                }
-////            }
-////        }
-//
-//        return false;
-//
-//    }
 
     public boolean anyMove() {
+
+        // TODO: 20/06/2021 Den går i loop hvis den kan rykke mellem 2 kort f.eks. 2h kan rykke mellem 3s og 3c så den rykker frem og tilbage konstant.
+        //kan måske løses ved at sige at den ikke skal rykke et kort hvis den allerede ligger på et ikke facedown kort.
+
+        //check if there are any face down cards in the tableau
+        for (int i = 0; i < 7; i++) {
+            if(!board.getTableauAll().get(i).isEmpty()){
+                if (board.getTableauAll().get(i).getFirst().getRank() == 0) {
+                    columnFrom = i;
+                    movingCards[0] = new Card("0",0,"Flip");
+                    movingCards[1] = new Card("0",0,"Flip");
+                    validMove ="flipCard";
+                    return true;
+                }
+            }
+        }
+
+        //Check if wastepile is empty then draw a card
+        if(board.getWastePile().isEmpty()){
+            movingCards[0] = new Card("0",0,"Draw");
+            movingCards[1] = new Card("0",0,"Draw");
+            validMove = "draw";
+            return true;
+        }
+
 
         //checking if a wastepile card can be moved to the foundation
         if (possibleFoundationMove(board.getWastePile().getFirst()) != null) {
@@ -66,11 +56,13 @@ public class Logic {
 
         //checking if tableau card can be moved to the foundation
         for (LinkedList<Card> tableauColumn : board.getTableauAll()) {
-            if (possibleFoundationMove(tableauColumn.getFirst()) != null) {
-                movingCards[0] = tableauColumn.getFirst();
-                movingCards[1] = possibleFoundationMove(tableauColumn.getFirst());
-                validMove ="tableauToFoundation";
-                return true;
+            if(!tableauColumn.isEmpty()){
+                if (possibleFoundationMove(tableauColumn.getFirst()) != null) {
+                    movingCards[0] = tableauColumn.getFirst();
+                    movingCards[1] = possibleFoundationMove(tableauColumn.getFirst());
+                    validMove ="tableauToFoundation";
+                    return true;
+                }
             }
         }
         //checking if a wastepile card can be moved to the tableau
@@ -107,18 +99,19 @@ public class Logic {
 
 
     public Card possibleTableauMove(Card cardToMove) {
-        // TODO: 18-06-2021 Tilføj ryk af konge til tom plads
         if (cardToMove.getSuit().equals("h") || cardToMove.getSuit().equals("d")) {
             for (LinkedList<Card> tableauColumn : board.getTableauAll()) {
-                if ((tableauColumn.getFirst().getSuit().equals("s") || tableauColumn.getFirst().getSuit().equals("c")) && tableauColumn.getFirst().getRank() + 1 == cardToMove.getRank()) {
-                    return tableauColumn.getFirst();
-                }
+                if(!tableauColumn.isEmpty())
+                    if ((tableauColumn.getFirst().getSuit().equals("s") || tableauColumn.getFirst().getSuit().equals("c")) && tableauColumn.getFirst().getRank() == cardToMove.getRank() +1) {
+                        return tableauColumn.getFirst();
+                    }
             }
         } else {
             for (LinkedList<Card> tableauColumn : board.getTableauAll()) {
-                if ((tableauColumn.getFirst().getSuit().equals("h") || tableauColumn.getFirst().getSuit().equals("d")) && tableauColumn.getFirst().getRank() + 1 == cardToMove.getRank()) {
-                    return tableauColumn.getFirst();
-                }
+                if(!tableauColumn.isEmpty())
+                    if ((tableauColumn.getFirst().getSuit().equals("h") || tableauColumn.getFirst().getSuit().equals("d")) && tableauColumn.getFirst().getRank() == cardToMove.getRank() +1) {
+                        return tableauColumn.getFirst();
+                    }
             }
         }
         return null;
@@ -146,14 +139,17 @@ public class Logic {
 
     public Card[] getMovingCards() {
 
+
 //        if (checkAceDeuce()) {
 //            return movingCards;
 //        }
         if (anyMove()) {
+            boardInfo();
             return movingCards;
         }
         movingCards[0] = null;
         movingCards[1] = null;
+
         return movingCards;
     }
 
