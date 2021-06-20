@@ -1,12 +1,37 @@
 package org.tensorflow.lite.examples.detection.logic;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+import org.tensorflow.lite.examples.detection.CameraActivity;
 import org.tensorflow.lite.examples.detection.DetectorActivity;
+
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
 
 
 public class Controller {
     private Board board = Board.getInstance();
     private Logic logic = new Logic();
+    private BoardSetup boardSetup;
+    private CameraActivity cameraActivity;
+    private SharedPreferences prefs;
 
+    public Controller(CameraActivity cameraActivity) {
+        this.cameraActivity = cameraActivity;
+        prefs = PreferenceManager.getDefaultSharedPreferences(cameraActivity);
+    }
+
+
+    public void initBoardSetup(LinkedHashSet<String> cardsDetected, LinkedList<String> allCardsDetected){
+        if(prefs.getBoolean("firstBoardSetup",true)){
+            boardSetup = new BoardSetup(cardsDetected,allCardsDetected);
+            Board.getInstance().setupBoard(boardSetup.makeCards());
+            prefs.edit().putBoolean("firstBoardSetup",false).apply();
+        } else{
+            logic.getMovingCards();
+        }
+    }
 
     public void updateBoard() {
 
@@ -38,10 +63,10 @@ public class Controller {
             board.drawCard(new Card("h",9,"9h"));
             System.out.println(board.getWastePile().get(0).getTitle());
         }
-
-
-
     }
 
+    public SharedPreferences getPrefs() {
+        return prefs;
+    }
 }
 

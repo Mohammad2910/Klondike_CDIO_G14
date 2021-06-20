@@ -20,6 +20,7 @@ import android.Manifest;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.camera2.CameraAccessException;
@@ -58,6 +59,7 @@ import org.tensorflow.lite.examples.detection.env.ImageUtils;
 import org.tensorflow.lite.examples.detection.env.Logger;
 import org.tensorflow.lite.examples.detection.logic.Board;
 import org.tensorflow.lite.examples.detection.logic.BoardSetup;
+import org.tensorflow.lite.examples.detection.logic.Controller;
 import org.tensorflow.lite.examples.detection.view.CameraConnectionFragment;
 import org.tensorflow.lite.examples.detection.view.LegacyCameraConnectionFragment;
 import org.tensorflow.lite.examples.detection.view.MakeMoveActivity;
@@ -67,6 +69,9 @@ public abstract class CameraActivity extends AppCompatActivity
         Camera.PreviewCallback,
         CompoundButton.OnCheckedChangeListener,
         View.OnClickListener {
+  private Controller controller;
+  private SharedPreferences prefs;
+
   private static final Logger LOGGER = new Logger();
 
   private static final int PERMISSIONS_REQUEST = 1;
@@ -99,6 +104,9 @@ public abstract class CameraActivity extends AppCompatActivity
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
+    controller = new Controller(this);
+    prefs = controller.getPrefs();
+
     LOGGER.d("onCreate " + this);
     super.onCreate(null);
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -138,8 +146,8 @@ public abstract class CameraActivity extends AppCompatActivity
 //        for (int i = 0; i < cardsDetect.size() ; i++) {
 //          System.out.println(cardsDetect.get(i));
 //        }
-        boardSetup = new BoardSetup(DetectorActivity.cardsDetected,DetectorActivity.allCardsDetected);
-        Board.getInstance().setupBoard(boardSetup.makeCards());
+
+        controller.initBoardSetup(DetectorActivity.cardsDetected,DetectorActivity.allCardsDetected);
 
 
         Intent i = new Intent(getApplicationContext(), MakeMoveActivity.class);
