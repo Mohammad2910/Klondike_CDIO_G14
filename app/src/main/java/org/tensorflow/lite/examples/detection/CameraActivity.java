@@ -146,6 +146,17 @@ public abstract class CameraActivity extends AppCompatActivity
 //        for (int i = 0; i < cardsDetect.size() ; i++) {
 //          System.out.println(cardsDetect.get(i));
 //        }
+        // TODO: 20/06/2021
+        /*
+        Når man trykker på knappen "next" kører den nogle if statements
+        hvor den tjekker hvad der er valid move f.eks.
+        hvis det er et hvor man skal filme et kort så skriver den at du skal filme kortet og gør at
+        næste gang man trykker går den ind i et andet if statement der kalder på controller "update board"
+        hvor den giver kortet med som parameter.
+        og de gange hvor man ikke skal filme skal den bare vise beskeden og så gøre det der står hvilket
+        vil sige bare at kalde på update board.
+
+         */
 
         controller.initBoardSetup(DetectorActivity.cardsDetected,DetectorActivity.allCardsDetected);
 
