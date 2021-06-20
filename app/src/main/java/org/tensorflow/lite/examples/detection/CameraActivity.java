@@ -149,7 +149,7 @@ public abstract class CameraActivity extends AppCompatActivity
 
         controller.initBoardSetup(DetectorActivity.cardsDetected,DetectorActivity.allCardsDetected);
 
-
+        System.out.println("VALID MOOOVE ----------------------|> " + controller.getValidMove());
         Intent i = new Intent(getApplicationContext(), MakeMoveActivity.class);
         startActivity(i);
       }
