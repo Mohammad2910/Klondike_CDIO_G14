@@ -66,8 +66,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
     private static final boolean SAVE_PREVIEW_BITMAP = false;
     private static final float TEXT_SIZE_DIP = 10;
-    public static LinkedHashSet<String> cardsDetected = new LinkedHashSet<String>();
-    public static LinkedList<String> allCardsDetected = new LinkedList<String>();
+    public static LinkedHashSet<String> cardsDetected = new LinkedHashSet<>();
+    public static LinkedList<String> allCardsDetected = new LinkedList<>();
     OverlayView trackingOverlay;
     private Integer sensorOrientation;
 
@@ -231,6 +231,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
 
                         for (int i = 0; i < results.size(); i++) {
+                            // TODO: 20-06-2021  Evt. increase confidence
                             if (mappedRecognitions.get(i).getConfidence() > 0.80f ) {
                                 allCardsDetected.add(mappedRecognitions.get(i).getTitle());
                                 cardsDetected.add(mappedRecognitions.get(i).getTitle());

@@ -67,6 +67,7 @@ public class Board {
         for (int i = 0; i < finalCards.length; i++) {
             if(finalCards[i].length() == 2){
                 suit = String.valueOf(finalCards[i].charAt(1));
+                //Replacer bogstaver med " " for at få ranken i digits
                 rank = Integer.parseInt(finalCards[i].replaceAll("[\\D]", ""));
                 listOfCards.add(new Card(suit, rank, finalCards[i]));
             }
