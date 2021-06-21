@@ -10,6 +10,7 @@ public class Logic {
     private static int columnTo;
     private static Card[] movingCards = new Card[2];
     private static String validMove = "";
+    private int noMoveCounter = 0;
 
     //    String[] cardSuits = {"S", "C", "H", "D"};
 
@@ -31,6 +32,7 @@ public class Logic {
                     movingCards[0] = new Card("0",0,"Flip");
                     movingCards[1] = new Card("0",0,"Flip");
                     validMove ="flipCard";
+                    noMoveCounter = 0;
                     return true;
                 }
             }
@@ -41,6 +43,7 @@ public class Logic {
             movingCards[0] = new Card("0",0,"Draw");
             movingCards[1] = new Card("0",0,"Draw");
             validMove = "draw";
+            noMoveCounter = 0;
             return true;
         }
 
@@ -50,6 +53,7 @@ public class Logic {
             movingCards[0] = board.getWastePile().getFirst();
             movingCards[1] = possibleFoundationMove(board.getWastePile().getFirst());
             validMove = "wastepileToFoundation";
+            noMoveCounter = 0;
             return true;
         }
 
@@ -60,6 +64,7 @@ public class Logic {
                     movingCards[0] = tableauColumn.getFirst();
                     movingCards[1] = possibleFoundationMove(tableauColumn.getFirst());
                     validMove ="tableauToFoundation";
+                    noMoveCounter = 0;
                     return true;
                 }
             }
@@ -69,6 +74,7 @@ public class Logic {
             movingCards[0] = board.getWastePile().getFirst();
             movingCards[1] = possibleTableauMove(board.getWastePile().getFirst());
             validMove = "wastepileToTableau";
+            noMoveCounter = 0;
             return true;
         }
         //checking if a tableau card can be moved to another tableau card.
@@ -77,6 +83,7 @@ public class Logic {
                 movingCards[0] = tableauCard;
                 movingCards[1] = possibleTableauMove(tableauCard);
                 validMove = "tableauToTableau";
+                noMoveCounter = 0;
                 return true;
             }
         }
@@ -92,7 +99,13 @@ public class Logic {
         movingCards[0] = new Card("0",0,"Draw");
         movingCards[1] = new Card("0",0,"Draw");
         validMove = "draw";
+        noMoveCounter++;
+        if(noMoveCounter > 24){
+            return false;
+        }
+
         return true;
+
     }
 
     //
@@ -174,9 +187,10 @@ public class Logic {
             boardInfo();
             return movingCards;
         }
-        movingCards[0] = null;
-        movingCards[1] = null;
 
+        movingCards[0] = new Card("", 0,"lost");
+        movingCards[1] = new Card("", 0,"lost");
+        // TODO: 21/06/2021 Returns lost when there is no other posible move:
         return movingCards;
     }
 
