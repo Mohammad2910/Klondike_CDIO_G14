@@ -92,19 +92,13 @@ public class Controller {
         }
 
         if (logic.getValidMove().equals("flipCard")) {
-            // TODO: 20/06/2021
-            //kald metoden "processImage" i DetectorActivity som så kan ud fra en if statement kalde på en metode i denne klasse der kalder board.flip(Card,logic.getColumnFrom));
             board.flipCardTableau(scannedCard, logic.getColumnFrom());
         }
         if (logic.getValidMove().equals("resetDrawpile")){
             board.resetDrawpile();
         }
         if (logic.getValidMove().equals("draw")) {
-            // TODO: 20/06/2021
-            //kald metoden "processImage" i DetectorActivity som så kan ud fra en if statement kalde på en metode i denne klasse der kalder board.drawCard(Card);
-
             board.drawCard(scannedCard);
-            System.out.println(board.getWastePile().get(0).getTitle());
         }
     }
 
