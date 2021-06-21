@@ -96,9 +96,9 @@ public class Controller {
             //kald metoden "processImage" i DetectorActivity som så kan ud fra en if statement kalde på en metode i denne klasse der kalder board.flip(Card,logic.getColumnFrom));
             board.flipCardTableau(scannedCard, logic.getColumnFrom());
         }
-//        if (){
-//            board.resetDrawpile();
-//        }
+        if (logic.getValidMove().equals("resetDrawpile")){
+            board.resetDrawpile();
+        }
         if (logic.getValidMove().equals("draw")) {
             // TODO: 20/06/2021
             //kald metoden "processImage" i DetectorActivity som så kan ud fra en if statement kalde på en metode i denne klasse der kalder board.drawCard(Card);

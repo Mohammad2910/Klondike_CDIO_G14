@@ -37,6 +37,7 @@ public class Logic {
             }
         }
 
+        // TODO: 21/06/2021 skal også trække kort når der ikke er andet at gøre.
         //Check if wastepile is empty then draw a card
         if(board.getWastePile().isEmpty()){
             movingCards[0] = new Card("0",0,"Draw");
@@ -81,8 +82,19 @@ public class Logic {
                 return true;
             }
         }
-        validMove = "";
-        return false;
+
+        if(board.getDrawPile().isEmpty()){
+            movingCards[0] = new Card("0",0,"Reset");
+            movingCards[1] = new Card("0",0,"Reset");
+            validMove = "resetDrawpile";
+            return true;
+        }
+
+
+        movingCards[0] = new Card("0",0,"Draw");
+        movingCards[1] = new Card("0",0,"Draw");
+        validMove = "draw";
+        return true;
     }
 
     //
