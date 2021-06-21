@@ -17,11 +17,12 @@
 package org.tensorflow.lite.examples.detection;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.hardware.Camera;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
@@ -38,12 +39,10 @@ import android.os.HandlerThread;
 import android.os.Trace;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
 
 import android.util.Size;
 import android.view.Surface;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -51,19 +50,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
 
 import org.tensorflow.lite.examples.detection.env.ImageUtils;
 import org.tensorflow.lite.examples.detection.env.Logger;
-import org.tensorflow.lite.examples.detection.logic.Board;
 import org.tensorflow.lite.examples.detection.logic.BoardSetup;
 import org.tensorflow.lite.examples.detection.logic.Card;
 import org.tensorflow.lite.examples.detection.logic.Controller;
 import org.tensorflow.lite.examples.detection.view.CameraConnectionFragment;
 import org.tensorflow.lite.examples.detection.view.LegacyCameraConnectionFragment;
-import org.tensorflow.lite.examples.detection.view.MakeMoveActivity;
 
 public abstract class CameraActivity extends AppCompatActivity
     implements OnImageAvailableListener,
@@ -97,6 +93,10 @@ public abstract class CameraActivity extends AppCompatActivity
 
   private Button nextBtn;
 
+  private String whatToDo;
+
+  private MoveDialog moveDialog;
+
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     controller = new Controller(this);
@@ -123,58 +123,70 @@ public abstract class CameraActivity extends AppCompatActivity
 
       @Override
       public void onClick(View view) {
-
-
-        if (firstRun){
-          controller.initBoardSetup(DetectorActivity.cardsDetected,DetectorActivity.allCardsDetected);
-          firstRun = false;
-        }
-
-        if(scanCard){
-           controller.updateBoard(controller.scanNewCard(DetectorActivity.cardsDetected,DetectorActivity.allCardsDetected));
-           scanCard = false;
-        }
-
-        movingCards = controller.getLogic().getMovingCards();
-
-        if (controller.getValidMove().equals("tableauToFoundation")){
-          System.out.println("Move " + movingCards[0].getTitle() + " to " + movingCards[1].getTitle());
-          controller.updateBoard(new Card("", 0 ,""));
-
-        } else if (controller.getValidMove().equals("tableauToTableau")){
-          System.out.println("Move " + movingCards[0].getTitle() + " to " + movingCards[1].getTitle());
-          controller.updateBoard(new Card("", 0 ,""));
-
-        } else if (controller.getValidMove().equals("wastepileToFoundation")){
-          System.out.println("Move " + movingCards[0].getTitle() + " to " + movingCards[1].getTitle());
-          controller.updateBoard(new Card("", 0 ,""));
-
-        } else if (controller.getValidMove().equals("wastepileToTableau")){
-          System.out.println("Move " + movingCards[0].getTitle() + " to " + movingCards[1].getTitle());
-          controller.updateBoard(new Card("", 0 ,""));
-
-        } else if (controller.getValidMove().equals("flipCard")){
-          System.out.println("Move " + movingCards[0].getTitle() + " to " + movingCards[1].getTitle());
-          scanCard = true;
-
-        } else if (controller.getValidMove().equals("draw")){
-          System.out.println("Move " + movingCards[0].getTitle() + " to " + movingCards[1].getTitle());
-          scanCard = true;
-        }
-
-
-        System.out.println("VALID MOOOVE ----------------------|> " + controller.getValidMove());
-
-
-
-        DetectorActivity.allCardsDetected.clear();
-        DetectorActivity.cardsDetected.clear();
+          onClickResult();
       }
-
 
 
     });
 
+  }
+
+  public void onClickResult(){
+
+
+    if (firstRun){
+      controller.initBoardSetup(DetectorActivity.cardsDetected,DetectorActivity.allCardsDetected);
+      firstRun = false;
+    }
+
+    if(scanCard){
+      controller.updateBoard(controller.scanNewCard(DetectorActivity.cardsDetected,DetectorActivity.allCardsDetected));
+      scanCard = false;
+    }
+
+    movingCards = controller.getLogic().getMovingCards();
+
+    if (controller.getValidMove().equals("tableauToFoundation")){
+      whatToDo = "Next";
+      System.out.println("Move " + movingCards[0].getTitle() + " to " + movingCards[1].getTitle());
+      controller.updateBoard(new Card("", 0 ,""));
+
+    } else if (controller.getValidMove().equals("tableauToTableau")){
+      whatToDo = "Next";
+      System.out.println("Move " + movingCards[0].getTitle() + " to " + movingCards[1].getTitle());
+      controller.updateBoard(new Card("", 0 ,""));
+
+    } else if (controller.getValidMove().equals("wastepileToFoundation")){
+      whatToDo = "Next";
+      System.out.println("Move " + movingCards[0].getTitle() + " to " + movingCards[1].getTitle());
+      controller.updateBoard(new Card("", 0 ,""));
+
+    } else if (controller.getValidMove().equals("wastepileToTableau")){
+      whatToDo ="Next";
+      System.out.println("Move " + movingCards[0].getTitle() + " to " + movingCards[1].getTitle());
+      controller.updateBoard(new Card("", 0 ,""));
+
+    } else if (controller.getValidMove().equals("flipCard")){
+      whatToDo = "Scan";
+      System.out.println("Move " + movingCards[0].getTitle() + " to " + movingCards[1].getTitle());
+      scanCard = true;
+
+    } else if (controller.getValidMove().equals("draw")){
+      whatToDo = "Scan";
+      System.out.println("Move " + movingCards[0].getTitle() + " to " + movingCards[1].getTitle());
+      scanCard = true;
+    }
+
+
+    System.out.println("VALID MOOOVE ----------------------|> " + controller.getValidMove());
+
+
+
+    DetectorActivity.allCardsDetected.clear();
+    DetectorActivity.cardsDetected.clear();
+
+    moveDialog = new MoveDialog(CameraActivity.this,movingCards, whatToDo);
+    moveDialog.show();
   }
 
   protected int[] getRgbBytes() {
@@ -555,4 +567,81 @@ public abstract class CameraActivity extends AppCompatActivity
   protected abstract void setNumThreads(int numThreads);
 
   protected abstract void setUseNNAPI(boolean isChecked);
+}
+
+class MoveDialog extends Dialog implements View.OnClickListener{
+
+  private Context context;
+  private Card[] movingCards;
+  private String whatToDo;
+
+  //Layout objects
+  private TextView currentTV;
+  private TextView destinationTV;
+  private Button dialogBtn;
+  private ImageView currCardIV;
+  private ImageView destCardIV;
+  private ImageView arrowBtn;
+  private ImageView arrowBtn2;
+  private String mDrawableNameCurrCard = "";
+  private String mDrawableNameDestCard = "";
+  private Resources res;
+  private LinearLayout cardToCardContainer;
+
+  public MoveDialog(@NonNull Context context, Card[] movingCards, String whatToDo) {
+    super(context);
+    this.context = context;
+    this.movingCards = movingCards;
+    this.whatToDo = whatToDo;
+    setContentView(R.layout.fragment_move_dialog);
+    this.cardToCardContainer = findViewById(R.id.cardToCardContainer);
+    this.currentTV = findViewById(R.id.card_origin);
+    this.destinationTV = findViewById(R.id.card_destination);
+    this.dialogBtn = findViewById(R.id.dialog_button);
+    this.currCardIV = findViewById(R.id.card_origin_img);
+    this.destCardIV = findViewById(R.id.card_destination_img);
+    this.arrowBtn = findViewById(R.id.arrowCardToCard);
+
+    dialogSetup();
+  }
+
+  public void dialogSetup(){
+    if (movingCards[0].getTitle().equals("Draw") || movingCards[0].getTitle().equals("Flip")){
+      currentTV.setText(movingCards[0].getTitle());
+      destinationTV.setText("a card");
+    } else{
+      currentTV.setText("Ryk: \n" + movingCards[0].getTitle());
+      destinationTV.setText("Til: \n" + movingCards[1].getTitle());
+      //Image views som blev sat til kortene korresponderende til getTitle.
+      cardToCardContainer.setVisibility(View.VISIBLE);
+      res = context.getResources();
+
+      mDrawableNameCurrCard = movingCards[0].getSuit() + movingCards[0].getRank();
+      mDrawableNameDestCard = movingCards[1].getSuit() + movingCards[1].getRank();
+      int currCardResID = res.getIdentifier(mDrawableNameCurrCard,"drawable", context.getPackageName());
+      int destCardResID = res.getIdentifier(mDrawableNameDestCard,"drawable", context.getPackageName());
+
+      System.out.println("------------------------------\n" + "First CARD : " + mDrawableNameCurrCard +"\n Second CARD: " + mDrawableNameDestCard + "\n currCardResID: " + currCardResID + "\n destCardResID: " + destCardResID);
+
+      currCardIV.setImageResource(currCardResID);
+      arrowBtn.setImageResource(R.drawable.ic_baseline_arrow_downward_24);
+      destCardIV.setImageResource(destCardResID);
+    }
+    dialogBtn.setText(whatToDo);
+    dialogBtn.setOnClickListener(this);
+  }
+
+  public void dialogBtn(View view){
+    if (whatToDo.equals("Next")){
+      ((CameraActivity)context).onClickResult();
+    }
+    Toast.makeText(getContext(),"Du har klikket på knappen!", Toast.LENGTH_LONG).show();
+    dismiss();
+  }
+  @Override
+  public void onClick(View view) {
+    if(R.id.dialog_button == view.getId()){
+      dialogBtn(view);
+    }
+  }
 }
