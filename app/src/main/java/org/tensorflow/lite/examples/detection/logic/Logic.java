@@ -100,7 +100,7 @@ public class Logic {
         movingCards[1] = new Card("0",0,"Draw");
         validMove = "draw";
         noMoveCounter++;
-        if(noMoveCounter > 24){
+        if(noMoveCounter > board.getDrawPile().size()){
             return false;
         }
 

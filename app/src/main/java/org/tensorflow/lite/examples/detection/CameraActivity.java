@@ -181,6 +181,7 @@ public abstract class CameraActivity extends AppCompatActivity
       System.out.println("Move " + movingCards[0].getTitle() + " to " + movingCards[1].getTitle());
       scanCard = true;
     }
+    // TODO: 21/06/2021 Mangler at lave reset drawpile 
 
 
     System.out.println("VALID MOOOVE ----------------------|> " + controller.getValidMove());
