@@ -59,6 +59,7 @@ import org.tensorflow.lite.examples.detection.env.ImageUtils;
 import org.tensorflow.lite.examples.detection.env.Logger;
 import org.tensorflow.lite.examples.detection.logic.Board;
 import org.tensorflow.lite.examples.detection.logic.BoardSetup;
+import org.tensorflow.lite.examples.detection.logic.Card;
 import org.tensorflow.lite.examples.detection.logic.Controller;
 import org.tensorflow.lite.examples.detection.view.CameraConnectionFragment;
 import org.tensorflow.lite.examples.detection.view.LegacyCameraConnectionFragment;
@@ -89,7 +90,9 @@ public abstract class CameraActivity extends AppCompatActivity
   private int yRowStride;
   private Runnable postInferenceCallback;
   private Runnable imageConverter;
-
+  private boolean firstRun = true;
+  private boolean scanCard = false;
+  private Card[] movingCards;
   private BoardSetup boardSetup;
   //private LinearLayout bottomSheetLayout;
   //private LinearLayout gestureLayout;
@@ -134,6 +137,12 @@ public abstract class CameraActivity extends AppCompatActivity
     nextBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+
+        if (firstRun){
+          controller.initBoardSetup(DetectorActivity.cardsDetected,DetectorActivity.allCardsDetected);
+          firstRun = false;
+        }
+
         /*
         Gå videre til en ny aktivitet
         */
@@ -155,15 +164,58 @@ public abstract class CameraActivity extends AppCompatActivity
         hvor den giver kortet med som parameter.
         og de gange hvor man ikke skal filme skal den bare vise beskeden og så gøre det der står hvilket
         vil sige bare at kalde på update board.
-
          */
 
-        controller.initBoardSetup(DetectorActivity.cardsDetected,DetectorActivity.allCardsDetected);
+        if(scanCard){
+           controller.updateBoard(controller.scanNewCard(DetectorActivity.cardsDetected,DetectorActivity.allCardsDetected));
+           scanCard = false;
+        }
+
+
+        //if (bolean == true){
+        //controller.updateBoard(card)
+        //bolean(flask).
+
+
+
+        movingCards = controller.getLogic().getMovingCards();
+
+        if (controller.getValidMove().equals("tableauToFoundation")){
+          System.out.println("Move " + movingCards[0].getTitle() + " to " + movingCards[1].getTitle());
+          controller.updateBoard(new Card("", 0 ,""));
+
+        } else if (controller.getValidMove().equals("tableauToTableau")){
+          System.out.println("Move " + movingCards[0].getTitle() + " to " + movingCards[1].getTitle());
+          controller.updateBoard(new Card("", 0 ,""));
+
+        } else if (controller.getValidMove().equals("wastepileToFoundation")){
+          System.out.println("Move " + movingCards[0].getTitle() + " to " + movingCards[1].getTitle());
+          controller.updateBoard(new Card("", 0 ,""));
+
+        } else if (controller.getValidMove().equals("wastepileToTableau")){
+          System.out.println("Move " + movingCards[0].getTitle() + " to " + movingCards[1].getTitle());
+          controller.updateBoard(new Card("", 0 ,""));
+
+        } else if (controller.getValidMove().equals("flipCard")){
+          System.out.println("Move " + movingCards[0].getTitle() + " to " + movingCards[1].getTitle());
+          scanCard = true;
+
+        } else if (controller.getValidMove().equals("draw")){
+          System.out.println("Move " + movingCards[0].getTitle() + " to " + movingCards[1].getTitle());
+          scanCard = true;
+        }
+
 
         System.out.println("VALID MOOOVE ----------------------|> " + controller.getValidMove());
-        Intent i = new Intent(getApplicationContext(), MakeMoveActivity.class);
-        startActivity(i);
+
+
+
+        DetectorActivity.allCardsDetected.clear();
+        DetectorActivity.cardsDetected.clear();
       }
+
+
+
     });
 
 //    ViewTreeObserver vto = gestureLayout.getViewTreeObserver();

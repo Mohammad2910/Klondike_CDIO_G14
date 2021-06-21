@@ -8,15 +8,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class BoardSetup {
-    private LinkedHashSet<String> cardsDetected = new LinkedHashSet<String>();
-    private LinkedList<String> allCardsDetected = new LinkedList<String>();
 
-    public BoardSetup(LinkedHashSet<String> cardsDetected, LinkedList<String> allCardsDetected) {
-        this.cardsDetected = cardsDetected;
-        this.allCardsDetected = allCardsDetected;
+    public BoardSetup() {
+
     }
 
-    public String[] makeCards() {
+    public String[] makeCards(LinkedHashSet<String> cardsDetected, LinkedList<String> allCardsDetected) {
         ArrayList<Integer> cardOccurence = new ArrayList<Integer>();
         for (String card : cardsDetected) {
             cardOccurence.add(Collections.frequency(allCardsDetected, card));
