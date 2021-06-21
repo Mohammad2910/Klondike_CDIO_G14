@@ -21,8 +21,7 @@ public class Logic {
 
     public boolean anyMove() {
 
-        // TODO: 20/06/2021 Den går i loop hvis den kan rykke mellem 2 kort f.eks. 2h kan rykke mellem 3s og 3c så den rykker frem og tilbage konstant.
-        //kan måske løses ved at sige at den ikke skal rykke et kort hvis den allerede ligger på et ikke facedown kort.
+        // TODO: 21/06/2021 Ryk konge move og lav at den checker for et win 
 
         //check if there are any face down cards in the tableau
         for (int i = 0; i < 7; i++) {
@@ -110,6 +109,15 @@ public class Logic {
 
 
     public Card possibleTableauMove(Card cardToMove) {
+
+        if(cardToMove.getRank() == 13){
+            for (LinkedList<Card> tableauColumn: board.getTableauAll()) {
+                if(tableauColumn.isEmpty()){
+                    return new Card("", 0 ,"foundation");
+                }
+            }
+        }
+
         if (cardToMove.getSuit().equals("h") || cardToMove.getSuit().equals("d")) {
             for (LinkedList<Card> tableauColumn : board.getTableauAll()) {
                 if(!tableauColumn.isEmpty())
@@ -146,6 +154,14 @@ public class Logic {
             }
         }
 
+    }
+    public boolean isWon(){
+        for (Card foundationCard :board.getFoundationsAll()) {
+            if(!(foundationCard.getRank() == 13)){
+                return false;
+            }
+        }
+        return true;
     }
 
     public Card[] getMovingCards() {

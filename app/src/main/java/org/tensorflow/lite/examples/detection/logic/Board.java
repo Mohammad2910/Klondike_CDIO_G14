@@ -215,6 +215,7 @@ public class Board {
             for (int i = columnCards.size() - 1; i >= 0; i--) {
                 if (!columnCards.get(i).getTitle().equals("NA")){
                     highestCards.add(columnCards.get(i));
+                    i = -1;
                 }
             }
         }

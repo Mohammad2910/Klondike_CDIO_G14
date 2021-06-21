@@ -133,6 +133,11 @@ public abstract class CameraActivity extends AppCompatActivity
 
   public void onClickResult(){
 
+    // TODO: 21/06/2021 if won then it should probably do something:
+    if(controller.getLogic().isWon()){
+      System.out.println(" YOU HAVE WON THE GAME -----------------------------");
+    }
+
 
     if (firstRun){
       controller.initBoardSetup(DetectorActivity.cardsDetected,DetectorActivity.allCardsDetected);
