@@ -94,15 +94,7 @@ public abstract class CameraActivity extends AppCompatActivity
   private boolean scanCard = false;
   private Card[] movingCards;
   private BoardSetup boardSetup;
-  //private LinearLayout bottomSheetLayout;
-  //private LinearLayout gestureLayout;
-//  private BottomSheetBehavior<LinearLayout> sheetBehavior;
-//
-//  protected TextView frameValueTextView, cropValueTextView, inferenceTimeTextView;
-//  protected ImageView bottomSheetArrowImageView;
-//  private ImageView plusImageView, minusImageView;
-//  private SwitchCompat apiSwitchCompat;
-//  private TextView threadsTextView;
+
   private Button nextBtn;
 
   @Override
@@ -124,59 +116,24 @@ public abstract class CameraActivity extends AppCompatActivity
     }
     //todo skal se omn github dur
 
-    //threadsTextView = findViewById(R.id.threads);
-    //plusImageView = findViewById(R.id.plus);
-    //minusImageView = findViewById(R.id.minus);
-    //apiSwitchCompat = findViewById(R.id.api_info_switch);
-    //bottomSheetLayout = findViewById(R.id.bottom_sheet_layout);
-    //gestureLayout = findViewById(R.id.gesture_layout);
-    //sheetBehavior = BottomSheetBehavior.from(bottomSheetLayout);
-    //bottomSheetArrowImageView = findViewById(R.id.bottom_sheet_arrow);
+
     nextBtn = findViewById(R.id.nextBtn);
 
     nextBtn.setOnClickListener(new View.OnClickListener() {
+
       @Override
       public void onClick(View view) {
+
 
         if (firstRun){
           controller.initBoardSetup(DetectorActivity.cardsDetected,DetectorActivity.allCardsDetected);
           firstRun = false;
         }
 
-        /*
-        Gå videre til en ny aktivitet
-        */
-//        System.out.println("----------------------------------LOOP 1---------------------------------");
-//        for (int i = 0; i < DetectorActivity.allCardsDetected.size() ; i++) {
-//          System.out.println(DetectorActivity.allCardsDetected.get(i));
-//        }
-//        ArrayList<String> cardsDetect = new ArrayList<>(DetectorActivity.cardsDetected);
-//        System.out.println("----------------------------------LOOP 2---------------------------------");
-//        for (int i = 0; i < cardsDetect.size() ; i++) {
-//          System.out.println(cardsDetect.get(i));
-//        }
-        // TODO: 20/06/2021
-        /*
-        Når man trykker på knappen "next" kører den nogle if statements
-        hvor den tjekker hvad der er valid move f.eks.
-        hvis det er et hvor man skal filme et kort så skriver den at du skal filme kortet og gør at
-        næste gang man trykker går den ind i et andet if statement der kalder på controller "update board"
-        hvor den giver kortet med som parameter.
-        og de gange hvor man ikke skal filme skal den bare vise beskeden og så gøre det der står hvilket
-        vil sige bare at kalde på update board.
-         */
-
         if(scanCard){
            controller.updateBoard(controller.scanNewCard(DetectorActivity.cardsDetected,DetectorActivity.allCardsDetected));
            scanCard = false;
         }
-
-
-        //if (bolean == true){
-        //controller.updateBoard(card)
-        //bolean(flask).
-
-
 
         movingCards = controller.getLogic().getMovingCards();
 
@@ -218,61 +175,6 @@ public abstract class CameraActivity extends AppCompatActivity
 
     });
 
-//    ViewTreeObserver vto = gestureLayout.getViewTreeObserver();
-//    vto.addOnGlobalLayoutListener(
-//        new ViewTreeObserver.OnGlobalLayoutListener() {
-//          @Override
-//          public void onGlobalLayout() {
-//            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-//              gestureLayout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-//            } else {
-//              gestureLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-//            }
-//            //int width = bottomSheetLayout.getMeasuredWidth();
-//            int height = gestureLayout.getMeasuredHeight();
-//
-//            //sheetBehavior.setPeekHeight(height);
-//          }
-//        });
-//    //sheetBehavior.setHideable(false);
-//
-//    sheetBehavior.setBottomSheetCallback(
-//        new BottomSheetBehavior.BottomSheetCallback() {
-//          @Override
-//          public void onStateChanged(@NonNull View bottomSheet, int newState) {
-//            switch (newState) {
-//              case BottomSheetBehavior.STATE_HIDDEN:
-//                break;
-//              case BottomSheetBehavior.STATE_EXPANDED:
-//                {
-//                  bottomSheetArrowImageView.setImageResource(R.drawable.icn_chevron_down);
-//                }
-//                break;
-//              case BottomSheetBehavior.STATE_COLLAPSED:
-//                {
-//                  bottomSheetArrowImageView.setImageResource(R.drawable.icn_chevron_up);
-//                }
-//                break;
-//              case BottomSheetBehavior.STATE_DRAGGING:
-//                break;
-//              case BottomSheetBehavior.STATE_SETTLING:
-//                bottomSheetArrowImageView.setImageResource(R.drawable.icn_chevron_up);
-//                break;
-//            }
-//          }
-//
-//          @Override
-//          public void onSlide(@NonNull View bottomSheet, float slideOffset) {}
-//        });
-
-//    frameValueTextView = findViewById(R.id.frame_info);
-//    cropValueTextView = findViewById(R.id.crop_info);
-//    inferenceTimeTextView = findViewById(R.id.inference_info);
-
-//    apiSwitchCompat.setOnCheckedChangeListener(this);
-//
-//    plusImageView.setOnClickListener(this);
-//    minusImageView.setOnClickListener(this);
   }
 
   protected int[] getRgbBytes() {

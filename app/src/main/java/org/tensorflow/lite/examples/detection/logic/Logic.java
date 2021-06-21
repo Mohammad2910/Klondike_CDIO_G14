@@ -37,7 +37,6 @@ public class Logic {
             }
         }
 
-        // TODO: 21/06/2021 skal også trække kort når der ikke er andet at gøre.
         //Check if wastepile is empty then draw a card
         if(board.getWastePile().isEmpty()){
             movingCards[0] = new Card("0",0,"Draw");

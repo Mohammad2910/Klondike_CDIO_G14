@@ -24,10 +24,10 @@ public class Board {
 
     //Foundation Cards
     private ArrayList<Card> foundationsAll = new ArrayList<Card>();
-    private Card foundation1 = new Card("h", 0, "");
-    private Card foundation2 = new Card("s", 0, "");
-    private Card foundation3 = new Card("c", 0, "");
-    private Card foundation4 = new Card("d", 0, "");
+    private Card foundation1 = new Card("h", 0, "Foundation");
+    private Card foundation2 = new Card("s", 0, "Foundation");
+    private Card foundation3 = new Card("c", 0, "Foundation");
+    private Card foundation4 = new Card("d", 0, "Foundation");
 
     //Wastepile
     private LinkedList<Card> wastePile = new LinkedList<>();
