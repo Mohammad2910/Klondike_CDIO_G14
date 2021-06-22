@@ -19,7 +19,6 @@ public class Controller {
     private BoardSetup boardSetup;
     private CameraActivity cameraActivity;
     private SharedPreferences prefs;
-    private String validMove;
     private boolean firstRun = true;
 
     public Controller(CameraActivity cameraActivity) {
@@ -107,7 +106,7 @@ public class Controller {
     }
 
     public String getValidMove() {
-        return validMove;
+        return logic.getValidMove();
     }
 
     public Logic getLogic() {

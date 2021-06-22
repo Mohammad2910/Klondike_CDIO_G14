@@ -582,9 +582,9 @@ class MoveDialog extends Dialog implements View.OnClickListener{
   private String whatToDo;
 
   //Layout objects
-  private TextView currentTV;
-  private TextView destinationTV;
+  private TextView actionText;
   private Button dialogBtn;
+  private ImageView actionIcon;
   private ImageView currCardIV;
   private ImageView destCardIV;
   private ImageView arrowBtn;
@@ -593,6 +593,7 @@ class MoveDialog extends Dialog implements View.OnClickListener{
   private String mDrawableNameDestCard = "";
   private Resources res;
   private LinearLayout cardToCardContainer;
+  private LinearLayout actionOtherContainer;
 
   public MoveDialog(@NonNull Context context, Card[] movingCards, String whatToDo) {
     super(context);
@@ -601,8 +602,9 @@ class MoveDialog extends Dialog implements View.OnClickListener{
     this.whatToDo = whatToDo;
     setContentView(R.layout.fragment_move_dialog);
     this.cardToCardContainer = findViewById(R.id.cardToCardContainer);
-    this.currentTV = findViewById(R.id.card_origin);
-    this.destinationTV = findViewById(R.id.card_destination);
+    this.actionOtherContainer = findViewById(R.id.actionOtherContainer);
+    this.actionText = findViewById(R.id.actionText);
+    this.actionIcon = findViewById(R.id.action_icon);
     this.dialogBtn = findViewById(R.id.dialog_button);
     this.currCardIV = findViewById(R.id.card_origin_img);
     this.destCardIV = findViewById(R.id.card_destination_img);
@@ -612,12 +614,16 @@ class MoveDialog extends Dialog implements View.OnClickListener{
   }
 
   public void dialogSetup(){
-    if (movingCards[0].getTitle().equals("Draw") || movingCards[0].getTitle().equals("Flip")){
-      currentTV.setText(movingCards[0].getTitle());
-      destinationTV.setText("a card");
-    } else{
-      currentTV.setText("Ryk: \n" + movingCards[0].getTitle());
-      destinationTV.setText("Til: \n" + movingCards[1].getTitle());
+    if (movingCards[0].getTitle().equals("Draw")){
+      actionOtherContainer.setVisibility(View.VISIBLE);
+      actionText.setText(movingCards[0].getTitle() + " a card");
+      actionIcon.setImageResource(R.drawable.ic_card_draw_svgrepo_com);
+    } else if (movingCards[0].getTitle().equals("Flip")){
+      actionOtherContainer.setVisibility(View.VISIBLE);
+      actionText.setText(movingCards[0].getTitle() + " a card");
+      actionIcon.setImageResource(R.drawable.ic_noun_open_19381);
+    }
+    else{
       //Image views som blev sat til kortene korresponderende til getTitle.
       cardToCardContainer.setVisibility(View.VISIBLE);
       res = context.getResources();
