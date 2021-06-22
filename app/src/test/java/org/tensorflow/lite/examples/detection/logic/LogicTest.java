@@ -36,9 +36,10 @@ public class LogicTest {
         Board.getInstance().setupBoard(boardSetup.makeCards(cardsDetected, allCardsDetected));
 
         Logic logic = new Logic();
+        Card expected = new Card("s", 0, "Foundation");
+        Card actual = logic.possibleFoundationMove(new Card("s",1,"1s"));
 
-
-        assertEquals(new Card("s", 0, "Foundation"), logic.possibleFoundationMove(new Card("s",1,"1s")) );
+        assertEquals(expected.getTitle(), actual.getTitle() );
 
 
 

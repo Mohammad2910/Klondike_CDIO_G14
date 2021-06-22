@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 import static org.junit.Assert.*;
 
-public class BoardSetupUnitTest {
+public class BoardSetupTest {
 
     @Test
     public void makeCards() {
