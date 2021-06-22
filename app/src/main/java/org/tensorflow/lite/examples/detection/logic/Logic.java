@@ -126,7 +126,7 @@ public class Logic {
         if(cardToMove.getRank() == 13){
             for (LinkedList<Card> tableauColumn: board.getTableauAll()) {
                 if(tableauColumn.isEmpty()){
-                    return new Card("", 0 ,"tableau");
+                    return new Card("emptytableau", 0 ,"tableau");
                 }
             }
         }
