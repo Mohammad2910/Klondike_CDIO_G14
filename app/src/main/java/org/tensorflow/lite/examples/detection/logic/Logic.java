@@ -18,19 +18,18 @@ public class Logic {
     }
 
 
-
     public boolean anyMove() {
 
         // TODO: 21/06/2021 Ryk konge move og lav at den checker for et win 
 
         //check if there are any face down cards in the tableau
         for (int i = 0; i < 7; i++) {
-            if(!board.getTableauAll().get(i).isEmpty()){
+            if (!board.getTableauAll().get(i).isEmpty()) {
                 if (board.getTableauAll().get(i).getFirst().getRank() == 0) {
                     columnFrom = i;
-                    movingCards[0] = new Card("0",0,"Flip");
-                    movingCards[1] = new Card("0",0,"Flip");
-                    validMove ="flipCard";
+                    movingCards[0] = new Card("0", 0, "Flip");
+                    movingCards[1] = new Card("0", 0, "Flip");
+                    validMove = "flipCard";
                     noMoveCounter = 0;
                     return true;
                 }
@@ -38,9 +37,9 @@ public class Logic {
         }
 
         //Check if wastepile is empty then draw a card
-        if(board.getWastePile().isEmpty()){
-            movingCards[0] = new Card("0",0,"Draw");
-            movingCards[1] = new Card("0",0,"Draw");
+        if (board.getWastePile().isEmpty()) {
+            movingCards[0] = new Card("0", 0, "Draw");
+            movingCards[1] = new Card("0", 0, "Draw");
             validMove = "draw";
             noMoveCounter = 0;
             return true;
@@ -58,11 +57,11 @@ public class Logic {
 
         //checking if tableau card can be moved to the foundation
         for (LinkedList<Card> tableauColumn : board.getTableauAll()) {
-            if(!tableauColumn.isEmpty()){
+            if (!tableauColumn.isEmpty()) {
                 if (possibleFoundationMove(tableauColumn.getFirst()) != null) {
                     movingCards[0] = tableauColumn.getFirst();
                     movingCards[1] = possibleFoundationMove(tableauColumn.getFirst());
-                    validMove ="tableauToFoundation";
+                    validMove = "tableauToFoundation";
                     noMoveCounter = 0;
                     return true;
                 }
@@ -87,19 +86,19 @@ public class Logic {
             }
         }
 
-        if(board.getDrawPile().isEmpty()){
-            movingCards[0] = new Card("0",0,"Reset");
-            movingCards[1] = new Card("0",0,"Reset");
+        if (board.getDrawPile().isEmpty()) {
+            movingCards[0] = new Card("0", 0, "Reset");
+            movingCards[1] = new Card("0", 0, "Reset");
             validMove = "resetDrawpile";
             return true;
         }
 
 
-        movingCards[0] = new Card("0",0,"Draw");
-        movingCards[1] = new Card("0",0,"Draw");
+        movingCards[0] = new Card("0", 0, "Draw");
+        movingCards[1] = new Card("0", 0, "Draw");
         validMove = "draw";
         noMoveCounter++;
-        if(noMoveCounter > board.getDrawPile().size()){
+        if (noMoveCounter > board.getDrawPile().size()) {
             return false;
         }
 
@@ -122,30 +121,32 @@ public class Logic {
 
     public Card possibleTableauMove(Card cardToMove) {
 
-        if(cardToMove.getRank() == 13){
+        if (cardToMove.getRank() == 13) {
             for (int i = 0; i < 7; i++) {
-                if(board.getTableauAll().get(i).getLast().getTitle().equals(cardToMove.getTitle())){
-                    return null;
+                if (!board.getTableauAll().get(i).isEmpty()) {
+                    if (board.getTableauAll().get(i).getLast().getTitle().equals(cardToMove.getTitle())) {
+                        return null;
+                    }
                 }
             }
-            for (LinkedList<Card> tableauColumn: board.getTableauAll()) {
-                if(tableauColumn.isEmpty()){
-                    return new Card("emptytableau", 0 ,"tableau");
+            for (LinkedList<Card> tableauColumn : board.getTableauAll()) {
+                if (tableauColumn.isEmpty()) {
+                    return new Card("emptytableau", 0, "tableau");
                 }
             }
         }
 
         if (cardToMove.getSuit().equals("h") || cardToMove.getSuit().equals("d")) {
             for (LinkedList<Card> tableauColumn : board.getTableauAll()) {
-                if(!tableauColumn.isEmpty())
-                    if ((tableauColumn.getFirst().getSuit().equals("s") || tableauColumn.getFirst().getSuit().equals("c")) && tableauColumn.getFirst().getRank() == cardToMove.getRank() +1) {
+                if (!tableauColumn.isEmpty())
+                    if ((tableauColumn.getFirst().getSuit().equals("s") || tableauColumn.getFirst().getSuit().equals("c")) && tableauColumn.getFirst().getRank() == cardToMove.getRank() + 1) {
                         return tableauColumn.getFirst();
                     }
             }
         } else {
             for (LinkedList<Card> tableauColumn : board.getTableauAll()) {
-                if(!tableauColumn.isEmpty())
-                    if ((tableauColumn.getFirst().getSuit().equals("h") || tableauColumn.getFirst().getSuit().equals("d")) && tableauColumn.getFirst().getRank() == cardToMove.getRank() +1) {
+                if (!tableauColumn.isEmpty())
+                    if ((tableauColumn.getFirst().getSuit().equals("h") || tableauColumn.getFirst().getSuit().equals("d")) && tableauColumn.getFirst().getRank() == cardToMove.getRank() + 1) {
                         return tableauColumn.getFirst();
                     }
             }
@@ -153,31 +154,32 @@ public class Logic {
         return null;
     }
 
-    public void boardInfo(){
+    public void boardInfo() {
 
 
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < board.getTableauAll().get(i).size(); j++) {
-                if (movingCards[0] == board.getTableauAll().get(i).get(j)){
+                if (movingCards[0] == board.getTableauAll().get(i).get(j)) {
                     columnFrom = i;
                 }
             }
         }
         for (int i = 0; i < 7; i++) {
-                if(movingCards[1].getSuit().equals("emptytableau") && board.getTableauAll().get(i).isEmpty()){
-                    columnTo = i;
-                }
+            if (movingCards[1].getSuit().equals("emptytableau") && board.getTableauAll().get(i).isEmpty()) {
+                columnTo = i;
+            }
             for (int j = 0; j < board.getTableauAll().get(i).size(); j++) {
-                if (movingCards[1] == board.getTableauAll().get(i).get(j)){
+                if (movingCards[1] == board.getTableauAll().get(i).get(j)) {
                     columnTo = i;
                 }
             }
         }
 
     }
-    public boolean isWon(){
-        for (Card foundationCard :board.getFoundationsAll()) {
-            if(!(foundationCard.getRank() == 13)){
+
+    public boolean isWon() {
+        for (Card foundationCard : board.getFoundationsAll()) {
+            if (!(foundationCard.getRank() == 13)) {
                 return false;
             }
         }
@@ -195,8 +197,8 @@ public class Logic {
             return movingCards;
         }
 
-        movingCards[0] = new Card("", 0,"lost");
-        movingCards[1] = new Card("", 0,"lost");
+        movingCards[0] = new Card("", 0, "lost");
+        movingCards[1] = new Card("", 0, "lost");
         // TODO: 21/06/2021 Returns lost when there is no other posible move:
         return movingCards;
     }
