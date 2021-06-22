@@ -11,7 +11,6 @@ public class Logic {
     private static Card[] movingCards = new Card[2];
     private static String validMove = "";
     private int noMoveCounter = 0;
-
     //    String[] cardSuits = {"S", "C", "H", "D"};
 
     public Logic() {
@@ -124,6 +123,11 @@ public class Logic {
     public Card possibleTableauMove(Card cardToMove) {
 
         if(cardToMove.getRank() == 13){
+            for (int i = 0; i < 7; i++) {
+                if(board.getTableauAll().get(i).getLast().getTitle().equals(cardToMove.getTitle())){
+                    return null;
+                }
+            }
             for (LinkedList<Card> tableauColumn: board.getTableauAll()) {
                 if(tableauColumn.isEmpty()){
                     return new Card("emptytableau", 0 ,"tableau");
@@ -160,6 +164,9 @@ public class Logic {
             }
         }
         for (int i = 0; i < 7; i++) {
+                if(movingCards[1].getSuit().equals("emptytableau") && board.getTableauAll().get(i).isEmpty()){
+                    columnTo = i;
+                }
             for (int j = 0; j < board.getTableauAll().get(i).size(); j++) {
                 if (movingCards[1] == board.getTableauAll().get(i).get(j)){
                     columnTo = i;
