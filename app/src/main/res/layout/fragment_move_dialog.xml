@@ -9,17 +9,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:minWidth="300dp"
-        android:minHeight="500dp"
+        android:minWidth="400dp"
+        android:minHeight="300dp"
         android:orientation="vertical"
         >
+        <TextView
+            android:id="@+id/actionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:layout_weight="1">
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="Draw, Move or Flip card"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:background="@color/startGameBtn"
+            />
 
         <LinearLayout
             android:id="@+id/actionOtherContainer"
@@ -27,39 +33,24 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:weightSum="3"
             android:visibility="gone">
-
-            <TextView
-                android:id="@+id/actionText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:gravity="center"
-                android:text="Draw or Flip card"
-                android:textColor="@color/gylden"
-                android:textStyle="bold"
-                android:fontFamily="cursive"
-                android:textSize="30dp" />
 
             <ImageView
                 android:id="@+id/action_icon"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
+                android:layout_width="200dp"
+                android:layout_height="250dp"
                 android:gravity="center"
-                android:src="@drawable/ic_noun_open_19381"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_card_draw_svgrepo_com"
                 android:tint="@color/startGameBtn"
                 android:textSize="24dp" />
-
-
         </LinearLayout>
         <LinearLayout
             android:id="@+id/cardToCardContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:weightSum="3"
             android:visibility="gone"
             >
@@ -69,13 +60,14 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/c12"
                 android:layout_weight="1"
-                android:layout_marginTop="10dp"/>
+                android:layout_margin="15dp"
+                />
             <ImageView
                 android:id="@+id/arrowCardToCard"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/ic_baseline_arrow_downward_24"
+                android:src="@drawable/ic_baseline_arrow_right_alt_24"
                 />
             <ImageView
                 android:id="@+id/card_destination_img"
@@ -83,22 +75,22 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:src="@drawable/h13"
-                android:layout_marginBottom="10dp"/>
+                android:layout_margin="15dp"
+                />
 
         </LinearLayout>
-    </LinearLayout>
-    <Button
-        android:id="@+id/dialog_button"
-        android:layout_gravity="center"
-        android:text="Scan Igen"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button"
-        android:fontFamily="monospace"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:typeface="normal"
-        android:layout_marginBottom="10dp"/>
+        <Button
+            android:id="@+id/dialog_button"
+            android:layout_gravity="center"
+            android:text="Scan Igen"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:typeface="normal"
+            android:layout_marginBottom="10dp"/>
     </LinearLayout>
 </FrameLayout>

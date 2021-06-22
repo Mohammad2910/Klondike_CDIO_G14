@@ -23,6 +23,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.hardware.Camera;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
@@ -192,6 +195,7 @@ public abstract class CameraActivity extends AppCompatActivity
     DetectorActivity.cardsDetected.clear();
 
     moveDialog = new MoveDialog(CameraActivity.this,movingCards, whatToDo);
+    moveDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     moveDialog.show();
   }
 
@@ -609,7 +613,6 @@ class MoveDialog extends Dialog implements View.OnClickListener{
     this.currCardIV = findViewById(R.id.card_origin_img);
     this.destCardIV = findViewById(R.id.card_destination_img);
     this.arrowBtn = findViewById(R.id.arrowCardToCard);
-
     dialogSetup();
   }
 
@@ -625,6 +628,7 @@ class MoveDialog extends Dialog implements View.OnClickListener{
     }
     else{
       //Image views som blev sat til kortene korresponderende til getTitle.
+      actionText.setText("Move card");
       cardToCardContainer.setVisibility(View.VISIBLE);
       res = context.getResources();
 
@@ -636,7 +640,7 @@ class MoveDialog extends Dialog implements View.OnClickListener{
       System.out.println("------------------------------\n" + "First CARD : " + mDrawableNameCurrCard +"\n Second CARD: " + mDrawableNameDestCard + "\n currCardResID: " + currCardResID + "\n destCardResID: " + destCardResID);
 
       currCardIV.setImageResource(currCardResID);
-      arrowBtn.setImageResource(R.drawable.ic_baseline_arrow_downward_24);
+      arrowBtn.setImageResource(R.drawable.ic_baseline_arrow_right_alt_24);
       destCardIV.setImageResource(destCardResID);
     }
     dialogBtn.setText(whatToDo);
