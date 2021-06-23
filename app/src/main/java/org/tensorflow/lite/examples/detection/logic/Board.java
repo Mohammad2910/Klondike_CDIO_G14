@@ -48,18 +48,7 @@ public class Board {
         return instance;
     }
 
-    /*
-    --------------BRUG DISSE KORT--------------------
 
-    Tableau C1 Indeholder: 10h
-    Tableau C2 Indeholder: 5h
-    Tableau C3 Indeholder: Bc
-    Tableau C4 Indeholder: Ad
-    Tableau C5 Indeholder: Kc
-    Tableau C6 Indeholder: Ds
-    Tableau C7 Indeholder: 7d
-
-     */
     public void setupBoard(String[] finalCards) {
         ArrayList<Card> listOfCards = new ArrayList<>();
         String suit;
