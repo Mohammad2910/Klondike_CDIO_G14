@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -57,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Dette bruges til nedbrudsrapportering
+        boolean EMULATOR = Build.PRODUCT.contains("sdk") || Build.MODEL.contains("Emulator");
+        if (!EMULATOR) {
+            Sentry.init(options -> {options.setDsn("https://5f670ad6e184435a87f42a93bcbb5f1c@o878315.ingest.sentry.io/5830036");});
+        }
 
         setContentView(R.layout.activity_main);
         cameraButton = findViewById(R.id.cameraButton);
