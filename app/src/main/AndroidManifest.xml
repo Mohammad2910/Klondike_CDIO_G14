@@ -18,6 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.ObjectDetection">
 
+        <meta-data android:name="io.sentry.dsn" android:value="https://5f670ad6e184435a87f42a93bcbb5f1c@o878315.ingest.sentry.io/5830036" />
+
         <activity
             android:name=".DetectorActivity"
             android:label="@string/tfe_od_app_name"

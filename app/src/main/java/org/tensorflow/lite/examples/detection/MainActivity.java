@@ -30,6 +30,8 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+import io.sentry.Sentry;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.5f;
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         cameraButton = findViewById(R.id.cameraButton);
         startImage = findViewById(R.id.startImage);
