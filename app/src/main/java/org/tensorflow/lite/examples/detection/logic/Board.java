@@ -1,14 +1,21 @@
 package org.tensorflow.lite.examples.detection.logic;
 
-//
+
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-//
 
+/**
+ * Gruppe medlemmer:
+ * Christian Merithz Uhrenfeldt Nielsen - s195480
+ * David Lukas Mikkelsen - s147197
+ * Johan Jens Kryger Larsen - s195491
+ * Mohammad Tawrat Nafiu Uddin - s184174
+ * Sander Eg Albeck Johansen - s195453
+ */
 public class Board {
     private static Board instance = null;
 

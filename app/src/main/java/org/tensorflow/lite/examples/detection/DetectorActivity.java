@@ -47,10 +47,13 @@ import org.tensorflow.lite.examples.detection.tflite.YoloV4Classifier;
 import org.tensorflow.lite.examples.detection.tracking.MultiBoxTracker;
 
 /**
- * An activity that uses a TensorFlowMultiBoxDetector and ObjectTracker to detect and then track
- * objects.
+ * Gruppe medlemmer:
+ * Christian Merithz Uhrenfeldt Nielsen - s195480
+ * David Lukas Mikkelsen - s147197
+ * Johan Jens Kryger Larsen - s195491
+ * Mohammad Tawrat Nafiu Uddin - s184174
+ * Sander Eg Albeck Johansen - s195453
  */
-//comment
 public class DetectorActivity extends CameraActivity implements OnImageAvailableListener {
     private static final Logger LOGGER = new Logger();
 

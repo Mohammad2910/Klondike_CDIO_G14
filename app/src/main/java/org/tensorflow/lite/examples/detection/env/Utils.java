@@ -21,6 +21,14 @@ import java.io.OutputStreamWriter;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
+/**
+ * Gruppe medlemmer:
+ * Christian Merithz Uhrenfeldt Nielsen - s195480
+ * David Lukas Mikkelsen - s147197
+ * Johan Jens Kryger Larsen - s195491
+ * Mohammad Tawrat Nafiu Uddin - s184174
+ * Sander Eg Albeck Johansen - s195453
+ */
 public class Utils {
 
     /**

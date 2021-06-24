@@ -23,6 +23,15 @@ import java.util.List;
 /**
  * Generic interface for interacting with different recognition engines.
  */
+
+/**
+ * Gruppe medlemmer:
+ * Christian Merithz Uhrenfeldt Nielsen - s195480
+ * David Lukas Mikkelsen - s147197
+ * Johan Jens Kryger Larsen - s195491
+ * Mohammad Tawrat Nafiu Uddin - s184174
+ * Sander Eg Albeck Johansen - s195453
+ */
 public interface Detector {
     List<Recognition> recognizeImage(Bitmap bitmap);
 

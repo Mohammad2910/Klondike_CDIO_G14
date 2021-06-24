@@ -21,6 +21,15 @@ import android.util.AttributeSet;
 import android.view.TextureView;
 
 /** A {@link TextureView} that can be adjusted to a specified aspect ratio. */
+
+/**
+ * Gruppe medlemmer:
+ * Christian Merithz Uhrenfeldt Nielsen - s195480
+ * David Lukas Mikkelsen - s147197
+ * Johan Jens Kryger Larsen - s195491
+ * Mohammad Tawrat Nafiu Uddin - s184174
+ * Sander Eg Albeck Johansen - s195453
+ */
 public class AutoFitTextureView extends TextureView {
   private int ratioWidth = 0;
   private int ratioHeight = 0;

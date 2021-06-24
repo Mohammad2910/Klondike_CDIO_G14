@@ -25,6 +25,15 @@ import android.graphics.Typeface;
 import java.util.Vector;
 
 /** A class that encapsulates the tedious bits of rendering legible, bordered text onto a canvas. */
+
+/**
+ * Gruppe medlemmer:
+ * Christian Merithz Uhrenfeldt Nielsen - s195480
+ * David Lukas Mikkelsen - s147197
+ * Johan Jens Kryger Larsen - s195491
+ * Mohammad Tawrat Nafiu Uddin - s184174
+ * Sander Eg Albeck Johansen - s195453
+ */
 public class BorderedText {
   private final Paint interiorPaint;
   private final Paint exteriorPaint;

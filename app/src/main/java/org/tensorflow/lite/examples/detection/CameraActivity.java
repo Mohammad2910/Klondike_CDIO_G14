@@ -64,6 +64,14 @@ import org.tensorflow.lite.examples.detection.logic.Controller;
 import org.tensorflow.lite.examples.detection.view.CameraConnectionFragment;
 import org.tensorflow.lite.examples.detection.view.LegacyCameraConnectionFragment;
 
+/**
+ * Gruppe medlemmer:
+ * Christian Merithz Uhrenfeldt Nielsen - s195480
+ * David Lukas Mikkelsen - s147197
+ * Johan Jens Kryger Larsen - s195491
+ * Mohammad Tawrat Nafiu Uddin - s184174
+ * Sander Eg Albeck Johansen - s195453
+ */
 public abstract class CameraActivity extends AppCompatActivity
     implements OnImageAvailableListener,
         Camera.PreviewCallback,

@@ -22,6 +22,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Size class independent of a Camera object. */
+/**
+ * Gruppe medlemmer:
+ * Christian Merithz Uhrenfeldt Nielsen - s195480
+ * David Lukas Mikkelsen - s147197
+ * Johan Jens Kryger Larsen - s195491
+ * Mohammad Tawrat Nafiu Uddin - s184174
+ * Sander Eg Albeck Johansen - s195453
+ */
 public class Size implements Comparable<Size>, Serializable {
 
   // 1.4 went out with this UID so we'll need to maintain it to preserve pending queries when

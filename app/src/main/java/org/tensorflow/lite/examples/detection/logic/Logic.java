@@ -3,6 +3,14 @@ package org.tensorflow.lite.examples.detection.logic;
 
 import java.util.LinkedList;
 
+/**
+ * Gruppe medlemmer:
+ * Christian Merithz Uhrenfeldt Nielsen - s195480
+ * David Lukas Mikkelsen - s147197
+ * Johan Jens Kryger Larsen - s195491
+ * Mohammad Tawrat Nafiu Uddin - s184174
+ * Sander Eg Albeck Johansen - s195453
+ */
 public class Logic {
 
     private Board board;

@@ -17,7 +17,14 @@ package org.tensorflow.lite.examples.detection.customview;
 
 import java.util.List;
 import org.tensorflow.lite.examples.detection.tflite.Detector.Recognition;
-
+/**
+ * Gruppe medlemmer:
+ * Christian Merithz Uhrenfeldt Nielsen - s195480
+ * David Lukas Mikkelsen - s147197
+ * Johan Jens Kryger Larsen - s195491
+ * Mohammad Tawrat Nafiu Uddin - s184174
+ * Sander Eg Albeck Johansen - s195453
+ */
 public interface ResultsView {
   public void setResults(final List<Recognition> results);
 }
