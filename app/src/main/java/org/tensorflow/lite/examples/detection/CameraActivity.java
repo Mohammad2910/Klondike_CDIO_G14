@@ -196,6 +196,7 @@ public abstract class CameraActivity extends AppCompatActivity
 
     moveDialog = new MoveDialog(CameraActivity.this,movingCards, whatToDo);
     moveDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    moveDialog.setCanceledOnTouchOutside(false);
     moveDialog.show();
   }
 
