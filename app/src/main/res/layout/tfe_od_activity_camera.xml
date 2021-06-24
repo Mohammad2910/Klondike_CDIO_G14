@@ -50,7 +50,7 @@
         android:background="@drawable/scanbutton"
         android:fontFamily="serif"
         android:lineSpacingExtra="8sp"
-        android:text="Næste"
+        android:text="Next"
         android:textColor="#FFF7B0"
         android:textColorHighlight="@color/startGameBtn"
         android:textSize="65dp"

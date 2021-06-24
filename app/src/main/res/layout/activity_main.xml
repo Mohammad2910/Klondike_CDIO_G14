@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="7-kabale løsning"
+            android:text="Klondike solver"
             android:gravity="center|top"
             android:typeface="monospace"
             android:textSize="18dp"
@@ -51,9 +51,8 @@
             android:layout_weight="0.1"
             android:background="@drawable/button"
             android:fontFamily="monospace"
-
             android:gravity="center"
-            android:text="Begynd Spil"
+            android:text="Start game"
             android:textColor="@color/white"
 
             android:textStyle="bold"
