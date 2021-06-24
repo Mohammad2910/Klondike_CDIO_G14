@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -29,6 +30,8 @@ import org.tensorflow.lite.examples.detection.tracking.MultiBoxTracker;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+
+import io.sentry.Sentry;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,6 +58,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Dette bruges til nedbrudsrapportering
+        boolean EMULATOR = Build.PRODUCT.contains("sdk") || Build.MODEL.contains("Emulator");
+        if (!EMULATOR) {
+            Sentry.init(options -> {options.setDsn("https://5f670ad6e184435a87f42a93bcbb5f1c@o878315.ingest.sentry.io/5830036");});
+        }
+
         setContentView(R.layout.activity_main);
         cameraButton = findViewById(R.id.cameraButton);
         startImage = findViewById(R.id.startImage);

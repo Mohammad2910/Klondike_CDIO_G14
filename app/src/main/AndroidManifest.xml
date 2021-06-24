@@ -17,6 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.ObjectDetection">
+        <!-- DETTE BRUGES TIL NEDBRUDSRAPPORTERING -->
+        <meta-data android:name="io.sentry.dsn" android:value="https://5f670ad6e184435a87f42a93bcbb5f1c@o878315.ingest.sentry.io/5830036" />
 
         <activity
             android:name=".DetectorActivity"
